@@ -1,21 +1,21 @@
 //@flow
 
 export default class Keyboard {
-	keysdown: Array<number>;
+	down: Array<number>;
 	constructor() {
-		this.keysdown = [];
+		this.down = [];
 		window.onkeydown = e => {
 			//strip duplicates
-			if (!this.down(e.keyCode)) {
-				this.keysdown.push(e.keyCode);
+			if (!this.getButton(e.keyCode)) {
+				this.down.push(e.keyCode);
 			}
 		};
 		window.onkeyup = e => {
-			this.keysdown.splice(this.keysdown.indexOf(e.keyCode), 1);
+			this.down.splice(this.down.indexOf(e.keyCode), 1);
 		};
 	}
-	down = (key: number) => {
-		return this.keysdown.indexOf(key) > -1;
+	getButton = (key: number) => {
+		return this.down.indexOf(key) > -1;
 	};
 	endTick() {}
 }
