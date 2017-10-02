@@ -26,8 +26,13 @@ keys down:
 key activity: 
 <%= JSON.stringify(input.keyboard.activity, null, 2) %>
 
-gamepads:
-<%= JSON.stringify(input.gamepad.gamepads, null, 2) %>
+gamepads:<% 
+	input.gamepad.gamepads[0].buttons.forEach(b => {
+		%>
+		<%= b.pressed?"on":"off" %><%	
+	}) 
+	%>
+	
 </pre>
 `);
 

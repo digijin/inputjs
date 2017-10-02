@@ -18,6 +18,7 @@ export default class Input {
 	endTick() {
 		this.mouse.endTick();
 		this.keyboard.endTick();
+		this.gamepad.endTick();
 	}
 	getAxis() {}
 	getButton() {}
