@@ -25,6 +25,9 @@ keys down:
 
 key activity: 
 <%= JSON.stringify(input.keyboard.activity, null, 2) %>
+
+gamepads:
+<%= JSON.stringify(input.gamepad.gamepads, null, 2) %>
 </pre>
 `);
 
