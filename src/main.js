@@ -17,8 +17,8 @@ mouse position:
 mouse down: 
 <%= JSON.stringify(input.mouse.down) %>
 
-key activity: 
-<%= JSON.stringify(input.keyboard.activity, null, 2) %>
+mouse activity: 
+<%= JSON.stringify(input.mouse.activity, null, 2) %>
 
 keys down: 
 <%= JSON.stringify(input.keyboard.down) %>
