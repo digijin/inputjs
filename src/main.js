@@ -9,12 +9,23 @@ export default input;
 
 let tpl = underscore.template(`
 
-    RAW: interval <%= interval %>ms per tick
-    <pre>
-    mouse position: <%= JSON.stringify(input.mouse.position) %>
-    mouse 1 down: <%= JSON.stringify(input.mouse.down) %>
-    keys down: <%= JSON.stringify(input.keyboard.down) %>
-    </pre>
+RAW: interval <%= interval %>ms per tick
+<pre>
+mouse position: 
+<%= JSON.stringify(input.mouse.position) %>
+
+mouse down: 
+<%= JSON.stringify(input.mouse.down) %>
+
+key activity: 
+<%= JSON.stringify(input.keyboard.activity, null, 2) %>
+
+keys down: 
+<%= JSON.stringify(input.keyboard.down) %>
+
+key activity: 
+<%= JSON.stringify(input.keyboard.activity, null, 2) %>
+</pre>
 `);
 
 let interval = 200;

@@ -4,7 +4,9 @@ import Point from "Point";
 export default class Mouse {
 	position: Point;
 	down: Object;
+	activity: { down: Array, up: Array };
 	constructor() {
+		this.activity = { down: [], up: [] };
 		this.down = {};
 		this.position = new Point({ x: 0, y: 0 });
 		document.addEventListener("mousemove", (e: MouseEvent): void => {
@@ -17,5 +19,7 @@ export default class Mouse {
 			this.down[e.button] = false;
 		});
 	}
-	endTick() {}
+	endTick() {
+		this.activity = { down: [], up: [] };
+	}
 }
