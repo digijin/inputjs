@@ -1,8 +1,8 @@
 {
-	"name": "inputjs",
+	"name": "unityinput",
 	"version": "0.0.1",
 	"description": "",
-	"main": "index.js",
+	"main": "src/index.js",
 	"scripts": {
 		"test": "echo \"Error: no test specified\" && exit 1"
 	},
@@ -18,6 +18,7 @@
 	"homepage": "https://github.com/digijin/inputjs#readme",
 	"dependencies": {
 		"babel-env": "^2.4.1",
+		"babel-loader": "^7.1.2",
 		"flow": "^0.2.3",
 		"jest": "^21.2.1",
 		"karma": "^1.7.1",
