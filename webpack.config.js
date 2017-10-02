@@ -9,7 +9,8 @@ module.exports = {
 		rules: [
 			{
 				test: /\.js/,
-				loader: "babel-loader"
+				loader: "babel-loader",
+				exclude: /node_modules/
 			}
 		]
 	},
@@ -23,7 +24,7 @@ module.exports = {
 			// proxy URLs to backend development server
 			"/api": "http://localhost:8000"
 		},
-		contentBase: path.join(__dirname, "src") // boolean | string | array, static file location
+		contentBase: path.join(__dirname, "demo") // boolean | string | array, static file location
 		// compress: true, // enable gzip compression
 		// historyApiFallback: true, // true for index.html upon 404, object for multiple paths
 		// hot: true, // hot module replacement. Depends on HotModuleReplacementPlugin
