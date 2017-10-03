@@ -7,7 +7,7 @@ let input = new Input();
 // window.UnityInput = input; //yuk
 export default input;
 
-let tpl = underscore.template(`
+let raw = underscore.template(`
 
 RAW: interval <%= interval %>ms per tick
 <pre>
@@ -26,12 +26,19 @@ keys down:
 key activity: 
 <%= JSON.stringify(input.keyboard.activity, null, 2) %>
 
-gamepads:<% 
+gamepads:<%= input.gamepad.gamepads[0].id %>
+	axes:
+		<% 
 if(input.gamepad.gamepads[0]){
-	%><%= input.gamepad.gamepads[0].timestamp %><%
+	input.gamepad.gamepads[0].axes.forEach(a => {
+		%><%= a %>
+		<%	
+	})
+	%>
+	buttons:<%
 	input.gamepad.gamepads[0].buttons.forEach(b => {
-		%>
-		<%= b.pressed?"on":"off" %><%	
+%>
+		<%= b.pressed?"on ":"off" %>- <%= b.value %><%	
 	}) 
 }else{
 	%>none detected<%
@@ -44,7 +51,7 @@ if(input.gamepad.gamepads[0]){
 let interval = 200;
 let content;
 let update = () => {
-	content.innerHTML = tpl({ input, interval });
+	content.innerHTML = raw({ input, interval });
 	input.endTick();
 	if (interval == 0) {
 		requestAnimationFrame(update);
