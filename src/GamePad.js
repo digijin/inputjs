@@ -7,7 +7,9 @@ export default class GamePad {
 	constructor() {
 		this.gamepads = gamepads;
 	}
-	endTick() {}
+	endTick() {
+		this.gamepads = navigator.getGamepads();
+	}
 }
 
 function gamepadHandler(event, connecting) {

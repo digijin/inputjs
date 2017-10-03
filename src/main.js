@@ -27,10 +27,15 @@ key activity:
 <%= JSON.stringify(input.keyboard.activity, null, 2) %>
 
 gamepads:<% 
+if(input.gamepad.gamepads[0]){
+	%><%= input.gamepad.gamepads[0].timestamp %><%
 	input.gamepad.gamepads[0].buttons.forEach(b => {
 		%>
 		<%= b.pressed?"on":"off" %><%	
 	}) 
+}else{
+	%>none detected<%
+}
 	%>
 	
 </pre>
