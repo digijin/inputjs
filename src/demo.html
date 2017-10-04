@@ -1,0 +1,40 @@
+RAW: interval
+<%= interval %>ms per tick
+
+	<div class="raw mouse">
+		<div class="label">
+
+			mouse position:
+		</div>
+		<pre><%= JSON.stringify(input.mouse.position) %></pre>
+		<div class="label"> mouse down:
+		</div>
+		<pre><%= JSON.stringify(input.mouse.down) %></pre> mouse activity:
+		<pre><%= JSON.stringify(input.mouse.activity, null, 2) %></pre>
+	</div>
+	<div class="raw keyboard">
+		<div class="label">keys down:
+		</div>
+		<pre><%= JSON.stringify(input.keyboard.down) %></pre>
+		<div class="label">key activity:
+		</div>
+		<pre><%= JSON.stringify(input.keyboard.activity, null, 2) %></pre>
+	</div>
+	<div class="raw gamepad">
+		<div class="label">gamepads:
+		</div>
+		<% if(input.gamepad.gamepads[0]){ %>
+			<pre><%= JSON.stringify({id: input.gamepad.gamepads[0].id,
+		axes: input.gamepad.gamepads[0].axes,
+		buttons: input.gamepad.gamepads[0].buttons.map(b => {
+			return {pressed:b.pressed, value: b.value}
+		})
+		}, null, 2) %></pre>
+
+			<% }else{ %>
+				none detected
+				<% } %>
+					<hr />
+
+	</div>
+	</div>

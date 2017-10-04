@@ -11,6 +11,11 @@ module.exports = {
 				test: /\.js/,
 				loader: "babel-loader",
 				exclude: /node_modules/
+			},
+			{
+				test: /\.html/,
+				loader: "raw-loader",
+				exclude: /node_modules/
 			}
 		]
 	},

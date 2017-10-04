@@ -7,46 +7,9 @@ let input = new Input();
 // window.UnityInput = input; //yuk
 export default input;
 
-let raw = underscore.template(`
+import template from "./demo.html";
 
-RAW: interval <%= interval %>ms per tick
-<pre>
-mouse position: 
-<%= JSON.stringify(input.mouse.position) %>
-
-mouse down: 
-<%= JSON.stringify(input.mouse.down) %>
-
-mouse activity: 
-<%= JSON.stringify(input.mouse.activity, null, 2) %>
-
-keys down: 
-<%= JSON.stringify(input.keyboard.down) %>
-
-key activity: 
-<%= JSON.stringify(input.keyboard.activity, null, 2) %>
-
-gamepads:<%= input.gamepad.gamepads[0].id %>
-	axes:
-		<% 
-if(input.gamepad.gamepads[0]){
-	input.gamepad.gamepads[0].axes.forEach(a => {
-		%><%= a %>
-		<%	
-	})
-	%>
-	buttons:<%
-	input.gamepad.gamepads[0].buttons.forEach(b => {
-%>
-		<%= b.pressed?"on ":"off" %>- <%= b.value %><%	
-	}) 
-}else{
-	%>none detected<%
-}
-	%>
-	
-</pre>
-`);
+let raw = underscore.template(template);
 
 let interval = 200;
 let content;
