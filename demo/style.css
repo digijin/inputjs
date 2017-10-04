@@ -3,7 +3,7 @@ body {
 	font-family: roboto;
 }
 
-.raw {
+.panel {
 	border: 1px solid grey;
 	border-radius: 8px;
 	box-shadow: 5px 5px 5px #888888;

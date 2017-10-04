@@ -1,40 +1,62 @@
-RAW: interval
-<%= interval %>ms per tick
+This data is being refreshed each
+<%= interval %>MS simulating
+	<%= 1/interval*1000 %>FPS
+		<div class="data panel axis">
+			<div class="label">
+				axes
+			</div>
+			<pre>
+input.getAxis('horizontal'); //<%= input.getAxis('horizontal') %>
+input.getAxis('vertical'); //<%= input.getAxis('vertical') %>
+	</pre>
+			<div class="label">
+				keys
+			</div>
+			<pre>
+input.getKey('left'); //<%= input.getKey('left') %>
+input.getKey('right'); //<%= input.getKey('right') %>
+input.getKey('up'); //<%= input.getKey('up') %>
+input.getKey('down'); //<%= input.getKey('down') %>
+input.getKey('ctrl'); //<%= input.getKey('ctrl') %>
+</pre>
+		</div>
 
-	<div class="raw mouse">
-		<div class="label">
+		<div class="raw panel mouse">
+			<div class="label">
 
-			mouse position:
+				mouse position:
+			</div>
+			<pre><%= JSON.stringify(input.mouse.position) %></pre>
+			<div class="label"> mouse down:
+			</div>
+			<pre><%= JSON.stringify(input.mouse.down) %></pre>
+			<div class="label"> mouse activity:
+			</div>
+			<pre><%= JSON.stringify(input.mouse.activity, null, 2) %></pre>
 		</div>
-		<pre><%= JSON.stringify(input.mouse.position) %></pre>
-		<div class="label"> mouse down:
+		<div class="raw panel keyboard">
+			<div class="label">keys down:
+			</div>
+			<pre><%= JSON.stringify(input.keyboard.down) %></pre>
+			<div class="label">key activity:
+			</div>
+			<pre><%= JSON.stringify(input.keyboard.activity, null, 2) %></pre>
 		</div>
-		<pre><%= JSON.stringify(input.mouse.down) %></pre> mouse activity:
-		<pre><%= JSON.stringify(input.mouse.activity, null, 2) %></pre>
-	</div>
-	<div class="raw keyboard">
-		<div class="label">keys down:
-		</div>
-		<pre><%= JSON.stringify(input.keyboard.down) %></pre>
-		<div class="label">key activity:
-		</div>
-		<pre><%= JSON.stringify(input.keyboard.activity, null, 2) %></pre>
-	</div>
-	<div class="raw gamepad">
-		<div class="label">gamepads:
-		</div>
-		<% if(input.gamepad.gamepads[0]){ %>
-			<pre><%= JSON.stringify({id: input.gamepad.gamepads[0].id,
+		<div class="raw panel gamepad">
+			<div class="label">gamepads:
+			</div>
+			<% if(input.gamepad.gamepads[0]){ %>
+				<pre><%= JSON.stringify({id: input.gamepad.gamepads[0].id,
 		axes: input.gamepad.gamepads[0].axes,
 		buttons: input.gamepad.gamepads[0].buttons.map(b => {
 			return {pressed:b.pressed, value: b.value}
 		})
 		}, null, 2) %></pre>
 
-			<% }else{ %>
-				none detected
-				<% } %>
-					<hr />
+				<% }else{ %>
+					none detected
+					<% } %>
+						<hr />
 
-	</div>
-	</div>
+		</div>
+		</div>

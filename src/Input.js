@@ -8,11 +8,11 @@ import defaults from "defaults";
 
 const defaultConfig = {
 	axes: {
-		Horizontal: {
+		horizontal: {
 			positive: "right",
 			negative: "left"
 		},
-		Vertical: {
+		vertical: {
 			positive: "up",
 			negative: "down"
 		}
@@ -62,8 +62,11 @@ export default class Input {
 	getJoystickNames() {}
 	getKey(keyCode: string | number) {
 		keyCode = this.map(keyCode);
-		if (this.keyStatus.hasOwnProperty(keyCode))
-			return this.keyStatus[keyCode];
+		// if (this.keyStatus.hasOwnProperty(keyCode))
+		// 	return this.keyStatus[keyCode];
+		if (this.keyboard.down.indexOf(keyCode) !== -1) {
+			return true;
+		}
 		return false;
 	}
 
