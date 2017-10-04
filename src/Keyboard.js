@@ -10,8 +10,8 @@ export default class Keyboard {
 			//strip duplicates
 			if (!this.getButton(e.keyCode)) {
 				this.down.push(e.keyCode);
+				this.activity.down.push(e.keyCode);
 			}
-			this.activity.down.push(e.keyCode);
 		};
 		window.onkeyup = e => {
 			this.down.splice(this.down.indexOf(e.keyCode), 1);
