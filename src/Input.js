@@ -29,7 +29,10 @@ const defaultConfig = {
 		enter: 13,
 		ctrl: 17,
 		escape: 27,
-		space: 32
+		space: 32,
+		jump: { type: "gamepad", button: 0 },
+		special: { type: "gamepad", button: 1 },
+		fire: { type: "gamepad", button: 2 }
 	}
 };
 
@@ -37,9 +40,10 @@ export default class Input {
 	mouse: Mouse;
 	keyboard: Keyboard;
 	gamepad: GamePad;
-	constructor() {
-		this.axes = defaultConfig.axes;
-		this.mapping = defaultConfig.mapping;
+	constructor(config = {}) {
+		config = Object.assign({}, defaultConfig, config);
+		this.axes = config.axes;
+		this.mapping = config.mapping;
 		this.mouse = new Mouse();
 		this.keyboard = new Keyboard();
 		this.gamepad = new GamePad();
@@ -59,7 +63,16 @@ export default class Input {
 		let neg = this.getKey(this.axes[axis].negative);
 		return (pos ? 1 : 0) + (neg ? -1 : 0);
 	}
-	getButton() {}
+	getButton(buttonName: string) {
+		let button = this.map(buttonName);
+		switch (button.type) {
+			case "gamepad":
+				let gp = this.gamepad.getGamePad();
+				if (!gp) return false;
+				return gp.buttons[button.button].value;
+				break;
+		}
+	}
 	getButtonDown() {}
 	getButtonUp() {}
 	getJoystickNames() {}

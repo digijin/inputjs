@@ -1,6 +1,6 @@
 var gamepads = navigator.getGamepads();
 
-console.log("gamepads", gamepads);
+// console.log("gamepads", gamepads);
 
 export default class GamePad {
 	gamepads: Object;
@@ -9,6 +9,13 @@ export default class GamePad {
 	}
 	endTick() {
 		this.gamepads = navigator.getGamepads();
+	}
+	getGamePad() {
+		let gp;
+		for (let i = 0; i < this.gamepads.length; i++) {
+			gp = gp || this.gamepads[i];
+		}
+		return gp;
 	}
 }
 
@@ -47,5 +54,5 @@ window.addEventListener("gamepadconnected", function(e) {
 		e.gamepad.buttons.length,
 		e.gamepad.axes.length
 	);
-	console.log(e.gamepad.buttons);
+	// console.log(e.gamepad.buttons);
 });
