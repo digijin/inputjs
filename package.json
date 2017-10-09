@@ -1,33 +1,47 @@
 {
-  "name": "unityinput",
-  "version": "0.0.5",
-  "description": "",
-  "main": "dist/unityinput.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "webpack",
-    "devserver": "webpack-dev-server"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/digijin/inputjs.git"
-  },
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/digijin/inputjs/issues"
-  },
-  "homepage": "https://github.com/digijin/inputjs#readme",
-  "dependencies": {
-    "babel-env": "^2.4.1",
-    "babel-loader": "^7.1.2",
-    "flow": "^0.2.3",
-    "jest": "^21.2.1",
-    "karma": "^1.7.1",
-    "karma-webpack": "^2.0.4",
-    "raw-loader": "^0.5.1",
-    "underscore": "^1.8.3",
-    "webpack": "^3.6.0",
-    "webpack-dev-server": "^2.9.1"
-  }
+	"name": "unityinput",
+	"version": "0.0.5",
+	"description": "",
+	"main": "dist/unityinput.js",
+	"scripts": {
+		"test": "jest",
+		"watch": "jest --watch",
+		"build": "webpack",
+		"dev": "webpack-dev-server"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/digijin/inputjs.git"
+	},
+	"author": "",
+	"license": "ISC",
+	"bugs": {
+		"url": "https://github.com/digijin/inputjs/issues"
+	},
+	"homepage": "https://github.com/digijin/inputjs#readme",
+	"dependencies": {
+		"babel-env": "^2.4.1",
+		"babel-loader": "^7.1.2",
+		"flow": "^0.2.3",
+		"jest": "^21.2.1",
+		"karma": "^1.7.1",
+		"karma-webpack": "^2.0.4",
+		"raw-loader": "^0.5.1",
+		"underscore": "^1.8.3",
+		"webpack": "^3.6.0",
+		"webpack-dev-server": "^2.9.1"
+	},
+	"jest": {
+		"setupTestFrameworkScriptFile": "<rootDir>/setupTest.js",
+		"moduleFileExtensions": ["js", "jsx"],
+		"moduleDirectories": ["node_modules", "src"],
+		"modulePaths": ["/src"],
+		"moduleNameMapper": {
+			"\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$":
+				"<rootDir>/__mocks__/fileMock.js",
+			"\\.(css|less|styl)$": "<rootDir>/__mocks__/styleMock.js"
+		},
+		"collectCoverage": false,
+		"coverageReporters": ["json", "lcov"]
+	}
 }

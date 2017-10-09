@@ -1,10 +1,11 @@
-var gamepads = navigator.getGamepads();
+var gamepads = {};
 
 // console.log("gamepads", gamepads);
 
 export default class GamePad {
 	gamepads: Object;
 	constructor() {
+		gamepads = navigator.getGamepads();
 		this.gamepads = gamepads;
 	}
 	endTick() {
@@ -18,6 +19,11 @@ export default class GamePad {
 		return gp;
 	}
 }
+
+/////
+////
+///EVERYTHING BELOW CAN PROBABLY BE DELETED
+//
 
 function gamepadHandler(event, connecting) {
 	var gamepad = event.gamepad;
