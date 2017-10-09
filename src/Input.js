@@ -33,10 +33,10 @@ const defaultConfig = {
 	},
 	buttons: {
 		jump: [{ type: "gamepad", button: 0 }, { type: "keyboard", key: 32 }],
-		special: { type: "gamepad", button: 1 },
+		special: [{ type: "gamepad", button: 1 }, { type: "mouse", button: 2 }],
 		fire: [
 			{ type: "gamepad", button: 2 },
-			{ type: "keyboard", key: 17 },
+			{ type: "keyboard", key: "ctrl" },
 			{ type: "mouse", button: 0 }
 		]
 	}
@@ -87,18 +87,25 @@ export default class Input {
 			.map(button => {
 				switch (button.type) {
 					case "gamepad":
-						let gp = this.gamepad.getGamePad();
-						if (gp) {
-							return gp.buttons[button.button].value;
-						}
+						return this.getGamePadButton(button.button);
 						break;
 					case "keyboard":
 						return this.getKey(button.key);
+						break;
+					case "mouse":
+						return this.getMouseButton(button.button);
 						break;
 				}
 				return 0;
 			})
 			.reduce((a, b) => a + b);
+	}
+	getGamePadButton(button): number {
+		let gp = this.gamepad.getGamePad();
+		if (gp) {
+			return gp.buttons[button].value;
+		}
+		return 0;
 	}
 	getButtonDown() {}
 	getButtonUp() {}
@@ -132,7 +139,9 @@ export default class Input {
 		}
 		return false;
 	}
-	getMouseButton() {}
+	getMouseButton(button) {
+		return this.mouse.down[button];
+	}
 	getMouseButtonDown() {}
 	getMouseButtonUp() {}
 }
