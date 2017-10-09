@@ -2,7 +2,7 @@
 
 export default class Keyboard {
 	down: Array<number>;
-	activity: { down: Array, up: Array };
+	activity: { down: Array<number>, up: Array<number> };
 	constructor() {
 		this.activity = { down: [], up: [] };
 		this.down = [];

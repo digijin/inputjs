@@ -44,7 +44,7 @@ module.exports = [
 		output: {
 			path: path.resolve(__dirname, "dist"),
 			filename: "unityinput.js",
-			libraryTarget: "var",
+			libraryTarget: "umd",
 			library: "UnityInput"
 		},
 

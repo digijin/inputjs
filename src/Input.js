@@ -1,7 +1,8 @@
 //@flow
 
 import Mouse from "Mouse";
-import Keyboard from "Keyboard";
+import KB from "Keyboard";
+export let Keyboard = KB;
 import GamePad from "GamePad";
 
 import defaults from "defaults";
