@@ -1,9 +1,11 @@
 //@flow
 
-import Mouse from "Mouse";
+import M from "Mouse";
+export let Mouse = M;
 import KB from "Keyboard";
 export let Keyboard = KB;
-import GamePad from "GamePad";
+import GP from "GamePad";
+export let GamePad = GP;
 
 import defaults from "defaults";
 
