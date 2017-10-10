@@ -14,4 +14,28 @@ describe("Input", () => {
 			new Input();
 		}).not.toThrow();
 	});
+	describe("keyboard", () => {
+		let input;
+		beforeEach(() => {
+			input = new Input({
+				mapping: {
+					test: 1
+				},
+				buttons: {
+					mapped: [{ type: "keyboard", key: "test" }],
+					raw: [{ type: "keyboard", key: 2 }]
+				}
+			});
+		});
+		describe("getButton", () => {
+			it("should return if raw", () => {
+				input.keyboard = { down: [2] };
+				expect(input.getButton("raw")).toBe(true);
+			});
+			it("should false if not raw", () => {
+				input.keyboard = { down: [] };
+				expect(input.getButton("raw")).toBe(false);
+			});
+		});
+	});
 });
