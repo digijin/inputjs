@@ -5,11 +5,16 @@ var gamepads = {};
 export default class GamePad {
 	gamepads: Object;
 	constructor() {
-		gamepads = navigator.getGamepads();
-		this.gamepads = gamepads;
+		if (navigator.getGamepads) {
+			//not available in headless like phantom
+			gamepads = navigator.getGamepads();
+			this.gamepads = gamepads;
+		}
 	}
 	endTick() {
-		this.gamepads = navigator.getGamepads();
+		if (navigator.getGamepads) {
+			this.gamepads = navigator.getGamepads();
+		}
 	}
 	getGamePad() {
 		let gp;
