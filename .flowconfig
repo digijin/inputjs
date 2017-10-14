@@ -1,0 +1,10 @@
+[options]
+unsafe.enable_getters_and_setters=true
+module.system.node.resolve_dirname=node_modules
+module.system.node.resolve_dirname=src
+suppress_comment= \\(.\\|\n\\)*\\FLOWHACK
+[ignore]
+.*/node_modules/fbjs/.*
+.*/node_modules/config-chain/.*
+.*/node_modules/node-sass/.*
+.*/node_modules/npmconf/.*
