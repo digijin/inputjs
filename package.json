@@ -5,7 +5,8 @@
 	"main": "dist/unityinput.js",
 	"scripts": {
 		"test": "jest",
-		"watch": "jest --watch",
+		"test:watch": "jest --watch",
+		"functional": "babel-node ./node_modules/.bin/karma",
 		"build": "webpack",
 		"dev": "webpack-dev-server"
 	},
@@ -23,6 +24,7 @@
 		"babel-env": "^2.4.1",
 		"babel-loader": "^7.1.2",
 		"flow": "^0.2.3",
+		"is-docker": "^1.1.0",
 		"jest": "^21.2.1",
 		"karma": "^1.7.1",
 		"karma-webpack": "^2.0.4",
