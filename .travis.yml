@@ -7,6 +7,7 @@ services:
 script:
 - yarn test
 deploy:
+  skip_cleanup: true
   provider: npm
   email: james@digijin.com
   api_key:

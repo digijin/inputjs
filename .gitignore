@@ -2,3 +2,4 @@ node_modules
 npm-error.log
 .vscode
 npm-debug.log
+dist
