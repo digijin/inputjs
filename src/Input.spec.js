@@ -38,13 +38,20 @@ describe("Input unit tests", () => {
 				expect(input.getButton("raw")).toBe(false);
 			});
 		});
-		it("getKey", () => {
-			input.keyboard = { down: [12] };
-			expect(input.getKey("test")).toBe(true);
-			expect(input.getKey("test2")).toBe(false);
-			input.keyboard = { down: [34] };
-			expect(input.getKey("test")).toBe(false);
-			expect(input.getKey("test2")).toBe(true);
+		describe("getKey", () => {
+			it("general", () => {
+				input.keyboard = { down: [12] };
+				expect(input.getKey("test")).toBe(true);
+				expect(input.getKey("12")).toBe(true);
+				expect(input.getKey("test2")).toBe(false);
+				input.keyboard = { down: [34] };
+				expect(input.getKey("test")).toBe(false);
+				expect(input.getKey("test2")).toBe(true);
+			});
+			it("maps to parsed ", () => {
+				input.keyboard = { down: [12] };
+				expect(input.getKey("12")).toBe(true);
+			});
 		});
 	});
 });
