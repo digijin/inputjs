@@ -21,7 +21,7 @@ module.exports = [
 		resolve: {
 			modules: ["node_modules", path.resolve(__dirname, "src")]
 		},
-		devtool: "source-map",
+		devtool: "inline-source-map",
 		target: "web"
 	},
 	{
@@ -63,5 +63,4 @@ module.exports = [
 			// ...
 		}
 	}
-	
 ];
