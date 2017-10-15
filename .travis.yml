@@ -6,6 +6,7 @@ services:
 - docker
 script:
 - yarn test
+before_deploy: "ls -la"
 deploy:
   skip_cleanup: true
   provider: npm
