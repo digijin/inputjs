@@ -5,6 +5,7 @@ sudo: required
 services:
 - docker
 script:
+- yarn build
 - yarn test
 before_deploy: "ls -la"
 deploy:
