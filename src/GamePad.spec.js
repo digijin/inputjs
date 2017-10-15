@@ -12,4 +12,13 @@ describe("GamePad unit tests", () => {
 			expect(gamepad.getGamePad()).toBe(gp);
 		});
 	});
+	describe("headless", () => {
+		it("should not fuck up if no navigator", () => {
+			let getgp = navigator.getGamepads;
+			navigator.getGamepads = null;
+			gamepad = new GamePad();
+			gamepad.endTick();
+			navigator.getGamepads = getgp;
+		});
+	});
 });

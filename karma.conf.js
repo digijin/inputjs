@@ -27,7 +27,7 @@ module.exports = function(config) {
 			{ pattern: "src/**/*spec.js", watched: false }
 		],
 		preprocessors: {
-			"src/**/*.js": ["coverage"],
+			"src/**/!(*.spec|*.karma).js": ["coverage"],
 			"**/*karma.js": ["webpack", "sourcemap"],
 			"**/*spec.js": ["webpack", "sourcemap"]
 		},
