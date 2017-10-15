@@ -95,7 +95,7 @@ describe("Input integration tests", () => {
 
 	describe("getButtonDown", () => {
 		describe("keyboard", () => {
-			it("should change from frame to frame", () => {
+			xit("should change from frame to frame", () => {
 				expect(input.getButtonDown("raw")).toBe(false);
 			});
 		});
