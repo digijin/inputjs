@@ -139,8 +139,8 @@ export default class Input {
 		}
 		return false;
 	}
-	getMouseButton(button) {
-		return this.mouse.down[button];
+	getMouseButton(button): boolean {
+		return this.mouse.down[button] || false;
 	}
 	getMouseButtonDown() {}
 	getMouseButtonUp() {}
