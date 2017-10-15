@@ -1,0 +1,17 @@
+language: node_js
+node_js:
+- '4'
+sudo: required
+services:
+- docker
+script:
+- yarn test
+deploy:
+  skip_cleanup: true
+  provider: npm
+  email: james@digijin.com
+  api_key:
+    secure: RYREtCu/smDmu6kqry13LWF0d6SBFPZKdwl0pUP/C8FaEnJhtM7dsD/0OoPr4cHEJf+a0jrM+zIuNwqkLpWxE3TTY5jvP8EvvLz93SuVvFenS9MQ1vTmYl/vomPet2cqV+8qcH5YIi7aUmr8ZShMo47z9rBE2qrIFlKoNRVbJXdZHnpfoDkaA1ksMDeEGOrxWbmwetzFudxpLuSdLw7Pwo1m0gZeAu1S43iB3XUiO2yKBgFUmTzeR+A/TB49HOB7N1I1IvLgEPRXtE6mr8EBhO6LKTuNFxCrGVXFNoS4cAH5ND5B7AzbS3lSNx6BgZern+dFQUTsIq3/HIX640A3POMx0CpzwUIKT1PBag3zv3PhLT3pqfdSOC/JAJ0ypDS5chDBQovJ2jwm6hFzhtHj1lmaSM/xSK0itY1nQbbo4GpHT3Y6R4m5oibvyi1fvQOYKQQhX+knTGR4rVdCcv4/hvMm2LNCpIMOp3q9Q+JqwPL9Z/D+i1gEioMeRGJ7ZrqAmpoyTDpkAQMWg9UZZr9AV0AlNRunKglop+5AMH0iruan3vnMMl6O/kUIrDbXPDRGqrq8IjviG0cdrvRal2HhQQBoWO5g3IJblqwffuUoC8bXnEJAp631R9csBfFAnSQfG8mDnvEXZiwIzzzueCaFUNJNcCBHkd7LaK0PcMh+RAI=
+  on:
+    tags: true
+    repo: digijin/inputjs
