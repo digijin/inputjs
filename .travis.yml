@@ -7,6 +7,7 @@ services:
 script:
 - yarn build
 - yarn test
+- docker-compose run dev xvfb-run yarn karma:ci
 before_deploy: "ls -la"
 deploy:
   skip_cleanup: true

@@ -10,6 +10,8 @@
 			"babel-node ./node_modules/karma/bin/karma start --browsers Chrome --single-run",
 		"karma:watch":
 			"babel-node ./node_modules/karma/bin/karma start --browsers Chrome",
+		"karma:ci":
+			"babel-node ./node_modules/karma/bin/karma start --browsers ChromeCI --single-run",
 		"build": "webpack",
 		"dev": "webpack-dev-server",
 		"deploy": "npm version patch && git push && git push --tags"
