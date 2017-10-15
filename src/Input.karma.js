@@ -12,8 +12,21 @@ let mouseEvent = function(eventName, params) {
 	target.dispatchEvent(event); //was document
 };
 
-describe("Input", () => {
-	let input = new Input();
+describe("Input integration tests", () => {
+	let input;
+
+	beforeEach(() => {
+		input = new Input({
+			mapping: {
+				test: 12,
+				test2: 34
+			},
+			buttons: {
+				mapped: [{ type: "keyboard", key: "test" }],
+				raw: [{ type: "keyboard", key: 2 }]
+			}
+		});
+	});
 	it("should exist", () => {
 		expect(Input).toBeDefined();
 	});
@@ -40,6 +53,30 @@ describe("Input", () => {
 			expect(input.getMouseButton(0)).toBe(true);
 			mouseEvent("mouseup", { button: 0 });
 			expect(input.getMouseButton(0)).toBe(false);
+		});
+	});
+
+	describe("endTick", () => {
+		it("should notify gamepad", () => {
+			spyOn(input.gamepad, "endTick");
+			input.endTick();
+			expect(input.gamepad.endTick).toHaveBeenCalled();
+		});
+		it("should notify keyboard", () => {
+			spyOn(input.keyboard, "endTick");
+			input.endTick();
+			expect(input.keyboard.endTick).toHaveBeenCalled();
+		});
+		it("should notify mouse", () => {
+			spyOn(input.mouse, "endTick");
+			input.endTick();
+			expect(input.mouse.endTick).toHaveBeenCalled();
+		});
+	});
+
+	describe("getButtonDown", () => {
+		describe("GamePad", () => {
+			it("");
 		});
 	});
 });

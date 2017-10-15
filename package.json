@@ -7,7 +7,7 @@
 		"test": "jest",
 		"test:watch": "jest --watch",
 		"karma":
-			"babel-node ./node_modules/karma/bin/karma start --browsers Chrome --single-run",
+			"babel-node ./node_modules/karma/bin/karma start --browsers ChromeHeadless --single-run",
 		"karma:watch":
 			"babel-node ./node_modules/karma/bin/karma start --browsers Chrome --reporters nyan,coverage",
 		"karma:ci":

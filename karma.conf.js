@@ -22,7 +22,10 @@ module.exports = function(config) {
 	config.set({
 		basePath: "",
 		frameworks: ["jasmine"],
-		files: [{ pattern: "src/**/*karma.js", watched: false }],
+		files: [
+			{ pattern: "src/**/*karma.js", watched: false },
+			{ pattern: "src/**/*spec.js", watched: false }
+		],
 		preprocessors: {
 			"src/**/*.js": ["coverage"],
 			"**/*karma.js": ["webpack", "sourcemap"],
@@ -42,7 +45,7 @@ module.exports = function(config) {
 			showSpecTiming: true
 		},
 		coverageIstanbulReporter: {
-			reports: ["html", "lcovonly", "text-summary"],
+			reports: ["html", "text-summary"],
 			dir: path.join(__dirname, "coverage"),
 			// if using webpack and pre-loaders, work around webpack breaking the source path
 			fixWebpackSourcePaths: true,

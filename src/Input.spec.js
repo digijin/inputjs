@@ -1,6 +1,6 @@
 import Input from "Input";
 
-describe("Input", () => {
+describe("Input unit tests", () => {
 	beforeAll(() => {
 		navigator.getGamepads = () => {
 			return { 0: false, length: 1 };
