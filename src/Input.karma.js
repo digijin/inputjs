@@ -22,6 +22,19 @@ describe("Input integration tests", () => {
 				test2: 34
 			},
 			buttons: {
+				jump: [
+					{ type: "gamepad", button: 0 },
+					{ type: "keyboard", key: 32 }
+				],
+				special: [
+					{ type: "gamepad", button: 1 },
+					{ type: "mouse", button: 2 }
+				],
+				fire: [
+					{ type: "gamepad", button: 2 },
+					{ type: "keyboard", key: "ctrl" },
+					{ type: "mouse", button: 0 }
+				],
 				mapped: [{ type: "keyboard", key: "test" }],
 				raw: [{ type: "keyboard", key: 2 }]
 			}
@@ -74,9 +87,17 @@ describe("Input integration tests", () => {
 		});
 	});
 
-	describe("getButtonDown", () => {
+	describe("getButton", () => {
 		describe("GamePad", () => {
-			it("");
+			it("should register");
+		});
+	});
+
+	describe("getButtonDown", () => {
+		describe("keyboard", () => {
+			it("should change from frame to frame", () => {
+				expect(input.getButtonDown("raw")).toBe(false);
+			});
 		});
 	});
 });
