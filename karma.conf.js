@@ -39,13 +39,14 @@ module.exports = function(config) {
 			}
 		},
 		webpack: webpackConf[0],
-		reporters: ["spec", "coverage-istanbul", "coverage"],
+		reporters: ["nyan", "spec", "coverage-istanbul"],
 		specReporter: {
 			suppressSkipped: true,
+			suppressPassed: true,
 			showSpecTiming: true
 		},
 		coverageIstanbulReporter: {
-			reports: ["html", "text-summary"],
+			reports: ["html", "text"],
 			dir: path.join(__dirname, "coverage"),
 			// if using webpack and pre-loaders, work around webpack breaking the source path
 			fixWebpackSourcePaths: true,
