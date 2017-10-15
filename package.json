@@ -1,13 +1,13 @@
 {
   "name": "unityinput",
-  "version": "0.0.12",
+  "version": "0.0.13",
   "description": "",
   "main": "dist/unityinput.js",
   "scripts": {
     "test": "jest",
     "test:watch": "jest --watch",
     "functional": "babel-node ./node_modules/.bin/karma",
-		"karma": "babel-node ./node_modules/karma/bin/karma start",
+    "karma": "babel-node ./node_modules/karma/bin/karma start",
     "build": "webpack",
     "dev": "webpack-dev-server",
     "deploy": "npm version patch && git push && git push --tags"
