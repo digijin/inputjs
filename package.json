@@ -1,61 +1,68 @@
 {
-  "name": "unityinput",
-  "version": "0.0.15",
-  "description": "",
-  "main": "dist/unityinput.js",
-  "scripts": {
-    "test": "jest",
-    "test:watch": "jest --watch",
-    "functional": "babel-node ./node_modules/.bin/karma",
-    "karma": "babel-node ./node_modules/karma/bin/karma start",
-    "build": "webpack",
-    "dev": "webpack-dev-server",
-    "deploy": "npm version patch && git push && git push --tags"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/digijin/inputjs.git"
-  },
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/digijin/inputjs/issues"
-  },
-  "homepage": "https://github.com/digijin/inputjs#readme",
-  "dependencies": {
-    "babel-env": "^2.4.1",
-    "babel-loader": "^7.1.2",
-    "flow": "^0.2.3",
-    "is-docker": "^1.1.0",
-    "jest": "^21.2.1",
-    "karma": "^1.7.1",
-    "karma-webpack": "^2.0.4",
-    "raw-loader": "^0.5.1",
-    "underscore": "^1.8.3",
-    "webpack": "^3.6.0",
-    "webpack-dev-server": "^2.9.1"
-  },
-  "jest": {
-    "setupTestFrameworkScriptFile": "<rootDir>/setupTest.js",
-    "moduleFileExtensions": [
-      "js",
-      "jsx"
-    ],
-    "moduleDirectories": [
-      "node_modules",
-      "src"
-    ],
-    "modulePaths": [
-      "/src"
-    ],
-    "moduleNameMapper": {
-      "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/__mocks__/fileMock.js",
-      "\\.(css|less|styl)$": "<rootDir>/__mocks__/styleMock.js"
-    },
-    "collectCoverage": false,
-    "coverageReporters": [
-      "json",
-      "lcov"
-    ]
-  }
+	"name": "unityinput",
+	"version": "0.0.15",
+	"description": "",
+	"main": "dist/unityinput.js",
+	"scripts": {
+		"test": "jest",
+		"test:watch": "jest --watch",
+		"karma": "babel-node ./node_modules/karma/bin/karma start --browsers Chrome --single-run",
+		"build": "webpack",
+		"dev": "webpack-dev-server",
+		"deploy": "npm version patch && git push && git push --tags"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/digijin/inputjs.git"
+	},
+	"author": "",
+	"license": "ISC",
+	"bugs": {
+		"url": "https://github.com/digijin/inputjs/issues"
+	},
+	"homepage": "https://github.com/digijin/inputjs#readme",
+	"dependencies": {
+		"babel-cli": "^6.26.0",
+		"babel-env": "^2.4.1",
+		"babel-loader": "^7.1.2",
+		"flow": "^0.2.3",
+		"is-docker": "^1.1.0",
+		"jasmine-core": "^2.8.0",
+		"jest": "^21.2.1",
+		"karma": "^1.7.1",
+		"karma-chrome-launcher": "^2.2.0",
+		"karma-coverage": "^1.1.1",
+		"karma-jasmine": "^1.1.0",
+		"karma-nyan-reporter": "^0.2.5",
+		"karma-sourcemap-loader": "^0.3.7",
+		"karma-spec-reporter": "^0.0.31",
+		"karma-webpack": "^2.0.4",
+		"raw-loader": "^0.5.1",
+		"underscore": "^1.8.3",
+		"webpack": "^3.6.0",
+		"webpack-dev-server": "^2.9.1"
+	},
+	"jest": {
+		"setupTestFrameworkScriptFile": "<rootDir>/setupTest.js",
+		"moduleFileExtensions": [
+			"js",
+			"jsx"
+		],
+		"moduleDirectories": [
+			"node_modules",
+			"src"
+		],
+		"modulePaths": [
+			"/src"
+		],
+		"moduleNameMapper": {
+			"\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/__mocks__/fileMock.js",
+			"\\.(css|less|styl)$": "<rootDir>/__mocks__/styleMock.js"
+		},
+		"collectCoverage": false,
+		"coverageReporters": [
+			"json",
+			"lcov"
+		]
+	}
 }

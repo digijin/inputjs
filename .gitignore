@@ -3,3 +3,4 @@ npm-error.log
 .vscode
 npm-debug.log
 dist
+coverage
