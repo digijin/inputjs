@@ -12,6 +12,19 @@ let mouseEvent = function(eventName, params) {
 	target.dispatchEvent(event); //was document
 };
 
+let mockGamepad = () => {
+	return {
+		timestamp: 0,
+		axes: [0, 0, 0, 0],
+		buttons: [
+			{ pressed: false, value: 0 },
+			{ pressed: false, value: 0 },
+			{ pressed: false, value: 0 },
+			{ pressed: false, value: 0 }
+		]
+	};
+};
+
 describe("Input integration tests", () => {
 	let input;
 
@@ -88,6 +101,24 @@ describe("Input integration tests", () => {
 	});
 
 	describe("getButton", () => {
+		describe("active device selective ignorance", () => {
+			it("should return keyboard value if it was used after gamepad", () => {
+				let gp = mockGamepad();
+				gp.timestamp = 1;
+				gp.buttons[0].pressed = true;
+				gp.buttons[0].value = 1;
+				spyOn(navigator, "getGamepads").and.returnValue({
+					length: 1,
+					"0": gp
+				});
+				input.endTick();
+				expect(input.getLastActivityDevice()).toBe("gamepad");
+				expect(input.getButton("jump")).toBe(1);
+				window.onkeyup({ keyCode: 32 });
+				expect(input.getLastActivityDevice()).toBe("keyboard");
+				expect(input.getButton("jump")).toBe(0);
+			});
+		});
 		describe("GamePad", () => {
 			// it("should register");
 		});
