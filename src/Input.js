@@ -159,4 +159,7 @@ export default class Input {
 			return "mouse";
 		}
 	}
+	getDevice() {
+		return this.getLastActivityDevice();
+	}
 }
