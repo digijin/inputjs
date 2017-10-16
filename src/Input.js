@@ -144,4 +144,16 @@ export default class Input {
 	}
 	getMouseButtonDown() {}
 	getMouseButtonUp() {}
+	getLastActivityDevice(): "mouse" | "keyboard" | "gamepad" {
+		if (
+			this.gamepad.lastAction >
+			Math.max(this.keyboard.lastAction, this.mouse.lastAction)
+		) {
+			return "gamepad";
+		} else if (this.keyboard.lastAction > this.mouse.lastAction) {
+			return "keyboard";
+		} else {
+			return "mouse";
+		}
+	}
 }

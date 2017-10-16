@@ -89,15 +89,33 @@ describe("Input integration tests", () => {
 
 	describe("getButton", () => {
 		describe("GamePad", () => {
-			it("should register");
+			// it("should register");
 		});
 	});
 
 	describe("getButtonDown", () => {
 		describe("keyboard", () => {
-			xit("should change from frame to frame", () => {
-				expect(input.getButtonDown("raw")).toBe(false);
+			// it("should change from frame to frame", () => {
+			// 	expect(input.getButtonDown("raw")).toBe(false);
+			// });
+		});
+	});
+	describe("getLastActivityDevice", () => {
+		it("mouse", () => {
+			mouseEvent("mousemove", { clientX: 10, clientY: 20 });
+			expect(input.getLastActivityDevice()).toBe("mouse");
+		});
+		it("keyboard", () => {
+			window.onkeydown({ keyCode: 1 });
+			expect(input.getLastActivityDevice()).toBe("keyboard");
+		});
+		it("gamepad", () => {
+			spyOn(navigator, "getGamepads").and.returnValue({
+				"0": { timestamp: 1234 },
+				length: 1
 			});
+			input.endTick();
+			expect(input.getLastActivityDevice()).toBe("gamepad");
 		});
 	});
 });
