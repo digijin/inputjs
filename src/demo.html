@@ -58,6 +58,7 @@ input.getButton('fire') //<%= JSON.stringify(input.getButton('fire')) %> //gamep
 				<pre><%= JSON.stringify(input.gamepad.getGamePad()) %></pre>
 				<pre><%= JSON.stringify({id: input.gamepad.getGamePad().id,
 		axes: input.gamepad.getGamePad().axes,
+		timestamp: input.gamepad.getGamePad().timestamp,
 		buttons: input.gamepad.getGamePad().buttons.map(b => {
 			return {pressed:b.pressed, value: b.value}
 		})

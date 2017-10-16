@@ -1,10 +1,22 @@
 import GamePad from "GamePad";
 
+//setup for headless
+if (!navigator.getGamepads) {
+	navigator.getGamepads = () => {
+		return { length: 1, "0": null };
+	};
+}
+
 describe("GamePad unit tests", () => {
 	let gamepad;
 	beforeEach(() => {
 		gamepad = new GamePad();
 	});
+
+	it("should cover missing navigator in headless", () => {
+		expect(navigator.getGamepads).toBeDefined();
+	});
+
 	describe("getGamePad", () => {
 		it("should return any non null object in gamepads", () => {
 			let gp = { name: "gamepad" };
@@ -19,6 +31,19 @@ describe("GamePad unit tests", () => {
 			gamepad = new GamePad();
 			gamepad.endTick();
 			navigator.getGamepads = getgp;
+		});
+	});
+	describe("lastAction", () => {
+		it("should be defined", () => {
+			expect(gamepad.lastAction).toBeDefined();
+		});
+		it("should update if gamepad timestamp changes", () => {
+			spyOn(navigator, "getGamepads").and.returnValue({
+				"0": { timestamp: 1234 },
+				length: 1
+			});
+			gamepad.endTick();
+			expect(gamepad.lastAction).toBeGreaterThan(0);
 		});
 	});
 });

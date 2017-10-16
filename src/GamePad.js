@@ -1,19 +1,25 @@
-var gamepads = {};
-
-// console.log("gamepads", gamepads);
-
 export default class GamePad {
 	gamepads: Object;
+	timestamp: number;
+	lastAction: number;
 	constructor() {
-		if (navigator.getGamepads) {
-			//not available in headless like phantom
-			gamepads = navigator.getGamepads();
-			this.gamepads = gamepads;
-		}
+		this.lastAction = 0; //never
+		this.timestamp = 0;
+		this.updateGamepads();
 	}
 	endTick() {
+		this.updateGamepads();
+	}
+	updateGamepads() {
 		if (navigator.getGamepads) {
 			this.gamepads = navigator.getGamepads();
+			let gp = this.getGamePad();
+			if (gp) {
+				if (gp.timestamp !== this.timestamp) {
+					this.timestamp = gp.timestamp;
+					this.lastAction = new Date().getTime();
+				}
+			}
 		}
 	}
 	getGamePad() {
@@ -24,46 +30,3 @@ export default class GamePad {
 		return gp;
 	}
 }
-
-/////
-////
-///EVERYTHING BELOW CAN PROBABLY BE DELETED
-//
-
-// function gamepadHandler(event, connecting) {
-// 	var gamepad = event.gamepad;
-// 	// Note:
-// 	// gamepad === navigator.getGamepads()[gamepad.index]
-
-// 	if (connecting) {
-// 		gamepads[gamepad.index] = gamepad;
-// 	} else {
-// 		delete gamepads[gamepad.index];
-// 	}
-// }
-
-// window.addEventListener(
-// 	"gamepadconnected",
-// 	function(e) {
-// 		gamepadHandler(e, true);
-// 	},
-// 	false
-// );
-// window.addEventListener(
-// 	"gamepaddisconnected",
-// 	function(e) {
-// 		gamepadHandler(e, false);
-// 	},
-// 	false
-// );
-
-// window.addEventListener("gamepadconnected", function(e) {
-// 	console.log(
-// 		"Gamepad connected at index %d: %s. %d buttons, %d axes.",
-// 		e.gamepad.index,
-// 		e.gamepad.id,
-// 		e.gamepad.buttons.length,
-// 		e.gamepad.axes.length
-// 	);
-// 	// console.log(e.gamepad.buttons);
-// });
