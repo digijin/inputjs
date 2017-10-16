@@ -118,6 +118,26 @@ describe("Input integration tests", () => {
 				expect(input.getLastActivityDevice()).toBe("keyboard");
 				expect(input.getButton("jump")).toBe(0);
 			});
+			it("should return gamepad value if it was used after keyboard", done => {
+				window.onkeydown({ keyCode: 32 });
+				expect(input.getLastActivityDevice()).toBe("keyboard");
+				expect(input.getButton("jump")).toBe(1);
+				setTimeout(() => {
+					//due to endtick a little bit later
+					let gp = mockGamepad();
+					gp.timestamp = 1;
+					gp.buttons[0].pressed = false;
+					gp.buttons[0].value = 0;
+					spyOn(navigator, "getGamepads").and.returnValue({
+						length: 1,
+						"0": gp
+					});
+					input.endTick();
+					expect(input.getLastActivityDevice()).toBe("gamepad");
+					expect(input.getButton("jump")).toBe(0);
+					done();
+				}, 10);
+			});
 		});
 		describe("GamePad", () => {
 			// it("should register");

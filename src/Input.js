@@ -87,13 +87,16 @@ export default class Input {
 			.map(button => {
 				switch (button.type) {
 					case "gamepad":
-						return this.getGamePadButton(button.button);
+						if (this.getLastActivityDevice() == "gamepad")
+							return this.getGamePadButton(button.button);
 						break;
 					case "keyboard":
-						return this.getKey(button.key);
+						if (this.getLastActivityDevice() !== "gamepad")
+							return this.getKey(button.key);
 						break;
 					case "mouse":
-						return this.getMouseButton(button.button);
+						if (this.getLastActivityDevice() !== "gamepad")
+							return this.getMouseButton(button.button);
 						break;
 				}
 				return 0;
