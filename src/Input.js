@@ -12,10 +12,12 @@ import defaults from "defaults";
 const defaultConfig = {
 	axes: {
 		horizontal: {
+			type: "keyboard",
 			positive: "right",
 			negative: "left"
 		},
 		vertical: {
+			type: "keyboard",
 			positive: "up",
 			negative: "down"
 		}

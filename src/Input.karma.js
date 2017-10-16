@@ -30,9 +30,25 @@ describe("Input integration tests", () => {
 
 	beforeEach(() => {
 		input = new Input({
+			axes: {
+				horizontal: {
+					type: "keyboard",
+					positive: "right",
+					negative: "left"
+				},
+				vertical: {
+					type: "keyboard",
+					positive: "up",
+					negative: "down"
+				}
+			},
 			mapping: {
 				test: 12,
-				test2: 34
+				test2: 34,
+				left: 37,
+				up: 38,
+				right: 39,
+				down: 40
 			},
 			buttons: {
 				jump: [
@@ -80,6 +96,23 @@ describe("Input integration tests", () => {
 			mouseEvent("mouseup", { button: 0 });
 			expect(input.getMouseButton(0)).toBe(false);
 		});
+	});
+	describe("getAxis", () => {
+		it("should exist", () => {
+			expect(input.getAxis).toBeDefined();
+		});
+		it("should keyboard", () => {
+			window.onkeydown({ keyCode: 37 });
+			expect(input.getKey("left")).toBe(true);
+			expect(input.getAxis("horizontal")).toBe(-1);
+			window.onkeydown({ keyCode: 39 });
+			expect(input.getKey("right")).toBe(true);
+			expect(input.getAxis("horizontal")).toBe(0);
+			window.onkeyup({ keyCode: 37 });
+			expect(input.getKey("left")).toBe(false);
+			expect(input.getAxis("horizontal")).toBe(1);
+		});
+		// it("should gamepad", ());
 	});
 
 	describe("endTick", () => {
