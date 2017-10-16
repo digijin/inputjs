@@ -39,7 +39,7 @@ module.exports = function(config) {
 			}
 		},
 		webpack: webpackConf[0],
-		reporters: ["nyan", "spec", "coverage-istanbul"],
+		reporters: ["spec", "coverage-istanbul"],
 		specReporter: {
 			suppressSkipped: true,
 			suppressPassed: true,
