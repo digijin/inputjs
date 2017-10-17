@@ -11,16 +11,22 @@ import defaults from "defaults";
 
 const defaultConfig = {
 	axes: {
-		horizontal: {
-			type: "keyboard",
-			positive: "right",
-			negative: "left"
-		},
-		vertical: {
-			type: "keyboard",
-			positive: "up",
-			negative: "down"
-		}
+		horizontal: [
+			{
+				type: "keyboard",
+				positive: "right",
+				negative: "left"
+			},
+			{ type: "gamepad", axis: 0 }
+		],
+		vertical: [
+			{
+				type: "keyboard",
+				positive: "up",
+				negative: "down"
+			},
+			{ type: "gamepad", axis: 1 }
+		]
 	},
 	mapping: {
 		left: 37,
@@ -74,9 +80,20 @@ export default class Input {
 		throw new Error("cant find button " + key);
 	}
 	getAxis(axis: string) {
-		let pos = this.getKey(this.axes[axis].positive);
-		let neg = this.getKey(this.axes[axis].negative);
-		return (pos ? 1 : 0) + (neg ? -1 : 0);
+		let axes = this.axes[axis];
+		for (let i = 0; i < axes.length; i++) {
+			if (this.getDevice() == "gamepad") {
+				if (axes[i].type == "gamepad") {
+					return this.gamepad.getGamePad().axes[axes[i].axis];
+				}
+			} else {
+				if (axes[i].type == "keyboard") {
+					let pos = this.getKey(axes[i].positive);
+					let neg = this.getKey(axes[i].negative);
+					return (pos ? 1 : 0) + (neg ? -1 : 0);
+				}
+			}
+		}
 	}
 	getButton(buttonName: string) {
 		let buttons = this.button(buttonName);

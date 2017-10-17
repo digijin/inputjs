@@ -31,16 +31,22 @@ describe("Input integration tests", () => {
 	beforeEach(() => {
 		input = new Input({
 			axes: {
-				horizontal: {
-					type: "keyboard",
-					positive: "right",
-					negative: "left"
-				},
-				vertical: {
-					type: "keyboard",
-					positive: "up",
-					negative: "down"
-				}
+				horizontal: [
+					{
+						type: "keyboard",
+						positive: "right",
+						negative: "left"
+					},
+					{ type: "gamepad", axis: 0 }
+				],
+				vertical: [
+					{
+						type: "keyboard",
+						positive: "up",
+						negative: "down"
+					},
+					{ type: "gamepad", axis: 1 }
+				]
 			},
 			mapping: {
 				test: 12,
@@ -103,6 +109,7 @@ describe("Input integration tests", () => {
 		});
 		it("should keyboard", () => {
 			window.onkeydown({ keyCode: 37 });
+			expect(input.getDevice()).toBe("keyboard");
 			expect(input.getKey("left")).toBe(true);
 			expect(input.getAxis("horizontal")).toBe(-1);
 			window.onkeydown({ keyCode: 39 });
@@ -121,6 +128,7 @@ describe("Input integration tests", () => {
 				"0": gp
 			});
 			input.endTick();
+			expect(input.getDevice()).toBe("gamepad");
 			expect(input.getAxis("horizontal")).toBe(1);
 		});
 		// it("should gamepad", ());
