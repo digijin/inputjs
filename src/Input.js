@@ -54,12 +54,12 @@ export default class Input {
 		return parseInt(key);
 	}
 	button(key: string | number): Array<{ type: string }> {
-		if (typeof key === "number") return key;
+		if (typeof key === "number") return [];
 		if (this.buttons[key]) return this.buttons[key];
 		// return parseInt(key);
 		throw new Error("cant find button " + key);
 	}
-	getAxis(axis: string) {
+	getAxis(axis: string): number {
 		let axes = this.axes[axis];
 		for (let i = 0; i < axes.length; i++) {
 			if (this.getDevice() == "gamepad") {
@@ -74,6 +74,7 @@ export default class Input {
 				}
 			}
 		}
+		return 0;
 	}
 	getButton(buttonName: string) {
 		let buttons = this.button(buttonName);
@@ -111,7 +112,7 @@ export default class Input {
 	}
 	getButtonDown() {}
 	getButtonUp() {}
-	getJoystickNames() {}
+	// getJoystickNames() {}
 	getKey(keyCode: string | number) {
 		keyCode = this.mapKeyboard(keyCode);
 		// if (this.keyStatus.hasOwnProperty(keyCode))
@@ -136,8 +137,12 @@ export default class Input {
 	getMouseButton(button: string | number): boolean {
 		return this.mouse.down[this.mapMouse(button)] || false;
 	}
-	getMouseButtonDown() {}
-	getMouseButtonUp() {}
+	getMouseButtonDown(button: string | number): boolean {
+		return this.mouse.activity.down.indexOf(this.mapMouse(button)) > -1;
+	}
+	getMouseButtonUp(button: string | number): boolean {
+		return this.mouse.activity.up.indexOf(this.mapMouse(button)) > -1;
+	}
 	getLastActivityDevice(): "mouse" | "keyboard" | "gamepad" {
 		if (
 			this.gamepad.lastAction >

@@ -94,6 +94,18 @@ describe("Input integration tests", () => {
 			expect(input.mouse.position.x).toBe(10);
 			expect(input.mouse.position.y).toBe(20);
 		});
+		it("should mouseup and mousedown", () => {
+			expect(input.getMouseButtonDown("left")).toBe(false);
+			mouseEvent("mousedown", { button: 0 });
+			expect(input.getMouseButtonDown("left")).toBe(true);
+			input.endTick();
+			expect(input.getMouseButtonDown("left")).toBe(false);
+			expect(input.getMouseButtonUp("left")).toBe(false);
+			mouseEvent("mouseup", { button: 0 });
+			expect(input.getMouseButtonUp("left")).toBe(true);
+			input.endTick();
+			expect(input.getMouseButtonUp("left")).toBe(false);
+		});
 	});
 	describe("getMouseButton", () => {
 		it("should detect clicks", () => {
