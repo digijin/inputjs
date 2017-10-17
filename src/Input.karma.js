@@ -48,7 +48,7 @@ describe("Input integration tests", () => {
 					{ type: "gamepad", axis: 1 }
 				]
 			},
-			mapping: {
+			keyboardMapping: {
 				test: 12,
 				test2: 34,
 				left: 37,

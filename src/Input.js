@@ -28,7 +28,7 @@ const defaultConfig = {
 			{ type: "gamepad", axis: 1 }
 		]
 	},
-	mapping: {
+	keyboardMapping: {
 		left: 37,
 		up: 38,
 		right: 39,
@@ -81,7 +81,7 @@ export default class Input {
 	constructor(config = {}) {
 		config = Object.assign({}, defaultConfig, config);
 		this.axes = config.axes;
-		this.mapping = config.mapping;
+		this.keyboardMapping = config.keyboardMapping;
 		this.gamepadMapping = config.gamepadMapping;
 		this.mouseMapping = config.mouseMapping;
 		this.buttons = config.buttons;
@@ -94,9 +94,9 @@ export default class Input {
 		this.keyboard.endTick();
 		this.gamepad.endTick();
 	}
-	map(key: string | number): number {
+	mapKeyboard(key: string | number): number {
 		if (typeof key === "number") return key;
-		if (this.mapping[key]) return this.mapping[key];
+		if (this.keyboardMapping[key]) return this.keyboardMapping[key];
 		return parseInt(key);
 	}
 	mapMouse(key: string | number): number {
@@ -172,7 +172,7 @@ export default class Input {
 	getButtonUp() {}
 	getJoystickNames() {}
 	getKey(keyCode: string | number) {
-		keyCode = this.map(keyCode);
+		keyCode = this.mapKeyboard(keyCode);
 		// if (this.keyStatus.hasOwnProperty(keyCode))
 		// 	return this.keyStatus[keyCode];
 		if (this.keyboard.down.indexOf(keyCode) !== -1) {
@@ -182,7 +182,7 @@ export default class Input {
 	}
 
 	getKeyDown(keyCode: string | number) {
-		keyCode = this.map(keyCode);
+		keyCode = this.mapKeyboard(keyCode);
 		if (this.keyChanged.hasOwnProperty(keyCode)) {
 			if (this.keyChanged[keyCode] === "down") {
 				return true;
@@ -192,7 +192,7 @@ export default class Input {
 	}
 
 	getKeyUp(keyCode) {
-		keyCode = this.map(keyCode);
+		keyCode = this.mapKeyboard(keyCode);
 		if (this.keyChanged.hasOwnProperty(keyCode)) {
 			if (this.keyChanged[keyCode] === "up") {
 				return true;

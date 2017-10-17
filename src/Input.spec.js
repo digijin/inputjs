@@ -61,7 +61,7 @@ describe("Input unit tests", () => {
 		let input;
 		beforeEach(() => {
 			input = new Input({
-				mapping: {
+				keyboardMapping: {
 					test: 12,
 					test2: 34
 				},
