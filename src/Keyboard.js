@@ -25,9 +25,9 @@ export default class Keyboard {
 	action() {
 		this.lastAction = new Date().getTime();
 	}
-	getButton = (key: number) => {
+	getButton(key: number) {
 		return this.down.indexOf(key) > -1;
-	};
+	}
 	endTick() {
 		this.activity = { down: [], up: [] };
 	}
