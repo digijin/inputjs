@@ -95,7 +95,9 @@ export default class Input {
 	}
 	mapGamepad(key: string | number): number {
 		if (typeof key === "number") return key;
-		if (this.gamepadMapping[key]) return this.gamepadMapping[key];
+		if (this.gamepadMapping.hasOwnProperty(key))
+			//value can be zero so using hasOwnProperty
+			return this.gamepadMapping[key];
 		return parseInt(key);
 	}
 	button(key: string | number): number {
