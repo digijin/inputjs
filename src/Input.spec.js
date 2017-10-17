@@ -14,6 +14,41 @@ describe("Input unit tests", () => {
 			new Input();
 		}).not.toThrow();
 	});
+	describe("gamepad", () => {
+		let input;
+		beforeEach(() => {
+			input = new Input({
+				gamepadMapping: {
+					a: 0,
+					b: 1
+				},
+				buttons: {
+					mapped: [{ type: "gamepad", button: "a" }],
+					raw: [{ type: "gamepad", key: 1 }]
+				}
+			});
+
+			spyOn(input, "getDevice").and.returnValue("gamepad");
+		});
+		describe("mapGamepad", () => {
+			it("sohuld return number", () => {
+				expect(input.mapGamepad(0)).toBe(0);
+			});
+			it("should map from string", () => {
+				expect(input.mapGamepad("a")).toBe(0);
+			});
+		});
+		describe("getButton", () => {
+			it("should return mapped", () => {
+				spyOn(navigator, "getGamepads").and.returnValue({
+					length: 1,
+					"0": { timestamp: 1, buttons: [{ value: 1 }, { value: 0 }] }
+				});
+				input.endTick();
+				expect(input.getButton("mapped")).toBe(1);
+			});
+		});
+	});
 	describe("keyboard", () => {
 		let input;
 		beforeEach(() => {

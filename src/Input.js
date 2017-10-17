@@ -40,6 +40,7 @@ const defaultConfig = {
 		space: 32
 	},
 	gamepadMapping: {
+		//xbox style
 		a: 0,
 		b: 1,
 		x: 2,
@@ -76,6 +77,7 @@ export default class Input {
 		config = Object.assign({}, defaultConfig, config);
 		this.axes = config.axes;
 		this.mapping = config.mapping;
+		this.gamepadMapping = config.gamepadMapping;
 		this.buttons = config.buttons;
 		this.mouse = new Mouse();
 		this.keyboard = new Keyboard();
@@ -89,6 +91,11 @@ export default class Input {
 	map(key: string | number): number {
 		if (typeof key === "number") return key;
 		if (this.mapping[key]) return this.mapping[key];
+		return parseInt(key);
+	}
+	mapGamepad(key: string | number): number {
+		if (typeof key === "number") return key;
+		if (this.gamepadMapping[key]) return this.gamepadMapping[key];
 		return parseInt(key);
 	}
 	button(key: string | number): number {
@@ -124,15 +131,15 @@ export default class Input {
 			.map(button => {
 				switch (button.type) {
 					case "gamepad":
-						if (this.getLastActivityDevice() == "gamepad")
+						if (this.getDevice() == "gamepad")
 							return this.getGamePadButton(button.button);
 						break;
 					case "keyboard":
-						if (this.getLastActivityDevice() !== "gamepad")
+						if (this.getDevice() !== "gamepad")
 							return this.getKey(button.key);
 						break;
 					case "mouse":
-						if (this.getLastActivityDevice() !== "gamepad")
+						if (this.getDevice() !== "gamepad")
 							return this.getMouseButton(button.button);
 						break;
 				}
@@ -140,10 +147,10 @@ export default class Input {
 			})
 			.reduce((a, b) => a + b);
 	}
-	getGamePadButton(button): number {
+	getGamePadButton(button: string | number): number {
 		let gp = this.gamepad.getGamePad();
 		if (gp) {
-			return gp.buttons[button].value;
+			return gp.buttons[this.mapGamepad(button)].value;
 		}
 		return 0;
 	}
