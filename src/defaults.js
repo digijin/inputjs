@@ -1,3 +1,5 @@
+//@flow
+
 export default {
 	keyboardMapping: {
 		left: 37,

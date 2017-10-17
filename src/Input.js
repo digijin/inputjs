@@ -13,7 +13,12 @@ export default class Input {
 	mouse: Mouse;
 	keyboard: Keyboard;
 	gamepad: GamePad;
-	constructor(config = {}) {
+	axes: { [string]: Array<Object> };
+	keyboardMapping: { [string]: number };
+	gamepadMapping: { [string]: number };
+	mouseMapping: { [string]: number };
+	buttons: { [string]: Array<{ type: string }> };
+	constructor(config: Object = {}) {
 		config = Object.assign({}, defaults, config);
 		this.axes = config.axes;
 		this.keyboardMapping = config.keyboardMapping;
@@ -47,7 +52,7 @@ export default class Input {
 			return this.gamepadMapping[key];
 		return parseInt(key);
 	}
-	button(key: string | number): number {
+	button(key: string | number): Array<{ type: string }> {
 		if (typeof key === "number") return key;
 		if (this.buttons[key]) return this.buttons[key];
 		// return parseInt(key);
