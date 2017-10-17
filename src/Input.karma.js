@@ -97,7 +97,7 @@ describe("Input integration tests", () => {
 	});
 	describe("getMouseButton", () => {
 		it("should detect clicks", () => {
-			expect(input.getMouseButton(0)).toBe(false);
+			expect(input.getMouseButton("left")).toBe(false);
 			mouseEvent("mousedown", { button: 0 });
 			expect(input.getMouseButton(0)).toBe(true);
 			mouseEvent("mouseup", { button: 0 });

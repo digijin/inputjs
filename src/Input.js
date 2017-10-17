@@ -39,6 +39,11 @@ const defaultConfig = {
 		escape: 27,
 		space: 32
 	},
+	mouseMapping: {
+		left: 0,
+		middle: 1,
+		right: 2
+	},
 	gamepadMapping: {
 		//xbox style
 		a: 0,
@@ -78,6 +83,7 @@ export default class Input {
 		this.axes = config.axes;
 		this.mapping = config.mapping;
 		this.gamepadMapping = config.gamepadMapping;
+		this.mouseMapping = config.mouseMapping;
 		this.buttons = config.buttons;
 		this.mouse = new Mouse();
 		this.keyboard = new Keyboard();
@@ -91,6 +97,12 @@ export default class Input {
 	map(key: string | number): number {
 		if (typeof key === "number") return key;
 		if (this.mapping[key]) return this.mapping[key];
+		return parseInt(key);
+	}
+	mapMouse(key: string | number): number {
+		if (typeof key === "number") return key;
+		if (this.mouseMapping.hasOwnProperty(key))
+			return this.mouseMapping[key];
 		return parseInt(key);
 	}
 	mapGamepad(key: string | number): number {
@@ -188,8 +200,8 @@ export default class Input {
 		}
 		return false;
 	}
-	getMouseButton(button): boolean {
-		return this.mouse.down[button] || false;
+	getMouseButton(button: string | number): boolean {
+		return this.mouse.down[this.mapMouse(button)] || false;
 	}
 	getMouseButtonDown() {}
 	getMouseButtonUp() {}
