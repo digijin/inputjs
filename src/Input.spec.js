@@ -63,7 +63,8 @@ describe("Input unit tests", () => {
 			input = new Input({
 				keyboardMapping: {
 					test: 12,
-					test2: 34
+					test2: 34,
+					space: 32
 				},
 				buttons: {
 					mapped: [{ type: "keyboard", key: "test" }],
@@ -94,6 +95,35 @@ describe("Input unit tests", () => {
 			it("maps to parsed ", () => {
 				input.keyboard = { down: [12] };
 				expect(input.getKey("12")).toBe(true);
+			});
+		});
+
+		describe("mapKeyboard", () => {
+			it("sohuld map", () => {
+				expect(input.keyboardMapping).toBeDefined();
+				expect(input.mapKeyboard("space")).toBe(32);
+			});
+		});
+
+		describe("getKeyDown", () => {
+			it("should ignore duplicates", () => {
+				expect(input.getKeyDown("space")).toBe(false);
+				input.endTick();
+				window.onkeydown({ keyCode: 32 });
+				expect(input.keyboard.activity.down[0]).toBe(32);
+				expect(input.getKeyDown("space")).toBe(true);
+				input.endTick();
+				window.onkeydown({ keyCode: 32 }); //ignore duplicates
+				expect(input.getKeyDown("space")).toBe(false);
+			});
+		});
+		describe("getKeyUp", () => {
+			it("should change per tick", () => {
+				expect(input.getKeyUp("space")).toBe(false);
+				window.onkeyup({ keyCode: 32 });
+				expect(input.getKeyUp("space")).toBe(true);
+				input.endTick();
+				expect(input.getKeyUp("space")).toBe(false);
 			});
 		});
 	});

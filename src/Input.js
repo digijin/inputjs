@@ -36,7 +36,8 @@ export default class Input {
 	}
 	mapKeyboard(key: string | number): number {
 		if (typeof key === "number") return key;
-		if (this.keyboardMapping[key]) return this.keyboardMapping[key];
+		if (this.keyboardMapping.hasOwnProperty(key))
+			return this.keyboardMapping[key];
 		return parseInt(key);
 	}
 	mapMouse(key: string | number): number {
@@ -122,23 +123,15 @@ export default class Input {
 	}
 
 	getKeyDown(keyCode: string | number) {
-		keyCode = this.mapKeyboard(keyCode);
-		if (this.keyChanged.hasOwnProperty(keyCode)) {
-			if (this.keyChanged[keyCode] === "down") {
-				return true;
-			}
-		}
-		return false;
+		return (
+			this.keyboard.activity.down.indexOf(this.mapKeyboard(keyCode)) > -1
+		);
 	}
 
-	getKeyUp(keyCode) {
-		keyCode = this.mapKeyboard(keyCode);
-		if (this.keyChanged.hasOwnProperty(keyCode)) {
-			if (this.keyChanged[keyCode] === "up") {
-				return true;
-			}
-		}
-		return false;
+	getKeyUp(keyCode: string | number) {
+		return (
+			this.keyboard.activity.up.indexOf(this.mapKeyboard(keyCode)) > -1
+		);
 	}
 	getMouseButton(button: string | number): boolean {
 		return this.mouse.down[this.mapMouse(button)] || false;
