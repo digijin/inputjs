@@ -112,6 +112,17 @@ describe("Input integration tests", () => {
 			expect(input.getKey("left")).toBe(false);
 			expect(input.getAxis("horizontal")).toBe(1);
 		});
+		it("should gamepad", () => {
+			let gp = mockGamepad();
+			gp.timestamp = 100;
+			gp.axes[0] = 1;
+			spyOn(navigator, "getGamepads").and.returnValue({
+				length: 1,
+				"0": gp
+			});
+			input.endTick();
+			expect(input.getAxis("horizontal")).toBe(1);
+		});
 		// it("should gamepad", ());
 	});
 
