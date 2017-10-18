@@ -69,7 +69,7 @@
 		"collectCoverage": false,
 		"coverageReporters": ["json", "lcov"]
 	},
-	"dependencies": {
+	"removed_dependencies": {
 		"esdoc": "^1.0.3",
 		"esdoc-flow-plugin": "^1.0.0",
 		"esdoc-standard-plugin": "^1.0.0"
