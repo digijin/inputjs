@@ -1,13 +1,13 @@
 //@flow
 
-import M from "Mouse";
+import M from "./Mouse";
 export let Mouse = M;
-import KB from "Keyboard";
+import KB from "./Keyboard";
 export let Keyboard = KB;
-import GP from "GamePad";
+import GP from "./GamePad";
 export let GamePad = GP;
 
-import defaults from "defaults";
+import defaults from "./defaults";
 /**
  * The main Input class
  */
