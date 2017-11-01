@@ -1,6 +1,6 @@
 {
   "name": "unityinput",
-  "version": "0.0.24",
+  "version": "0.0.25",
   "description": "",
   "main": "lib/Input.js",
   "scripts": {
