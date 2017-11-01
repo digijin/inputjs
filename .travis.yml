@@ -11,6 +11,8 @@ script:
 - yarn test
 - yarn karma
 - yarn build:flow
+- rm lib/*.spec.js
+- rm lib/main*
 before_deploy: "ls -la"
 deploy:
   skip_cleanup: true
