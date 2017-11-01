@@ -11,6 +11,7 @@ import defaults from "defaults";
 /**
  * The main Input class
  */
+type ButtonType = { type: string, button: number, key: number };
 export default class Input {
 	mouse: Mouse;
 	keyboard: Keyboard;
@@ -19,7 +20,9 @@ export default class Input {
 	keyboardMapping: { [string]: number };
 	gamepadMapping: { [string]: number };
 	mouseMapping: { [string]: number };
-	buttons: { [string]: Array<{ type: string }> };
+	buttons: {
+		[string]: Array<ButtonType>
+	};
 
 	/**
 	 * Constructor
@@ -83,7 +86,7 @@ export default class Input {
 	 * @param {string|number} key 
 	 * @return {Array} value
 	 */
-	button(key: string | number): Array<{ type: string }> {
+	button(key: string | number): Array<ButtonType> {
 		if (typeof key === "number") return [];
 		if (this.buttons[key]) return this.buttons[key];
 		// return parseInt(key);

@@ -4,7 +4,7 @@ import Point from "Point";
 export default class Mouse {
 	position: Point;
 	down: Object;
-	activity: { down: Array, up: Array };
+	activity: { down: Array<number>, up: Array<number> };
 	lastAction: number;
 	constructor() {
 		this.activity = { down: [], up: [] };

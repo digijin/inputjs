@@ -78,5 +78,8 @@
     "esdoc": "^1.0.3",
     "esdoc-flow-plugin": "^1.0.0",
     "esdoc-standard-plugin": "^1.0.0"
+  },
+  "dependencies": {
+    "flow-bin": "^0.57.3"
   }
 }
