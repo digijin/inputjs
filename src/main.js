@@ -12,7 +12,7 @@ import template from "./demo.html";
 let raw = underscore.template(template);
 
 let interval = 200;
-let content;
+let content: HTMLDivElement;
 let update = () => {
 	content.innerHTML = raw({ input, interval });
 	input.endTick();

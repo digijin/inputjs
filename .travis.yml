@@ -6,6 +6,7 @@ services:
 - docker
 script:
 - yarn build
+- yarn build:flow
 - yarn test
 - yarn karma:docker
 before_deploy: "ls -la"

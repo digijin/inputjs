@@ -3,5 +3,6 @@ npm-error.log
 .vscode
 npm-debug.log
 dist
+lib
 coverage
 docs
