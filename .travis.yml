@@ -4,10 +4,12 @@ node_js:
 sudo: required
 services:
 - docker
+addons:
+  chrome: stable
 script:
 - yarn build
 - yarn test
-- yarn karma:docker
+- yarn karma
 - yarn build:flow
 before_deploy: "ls -la"
 deploy:
