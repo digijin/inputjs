@@ -11,7 +11,7 @@ import defaults from "./defaults";
 /**
  * The main Input class
  */
-type ButtonType = { type: string, button: number, key: number };
+export type ButtonType = { type: string, button: number, key: number };
 export default class Input {
 	mouse: Mouse;
 	keyboard: Keyboard;
@@ -119,32 +119,34 @@ export default class Input {
 	 * @param {string} buttonName 
 	 * @return {number} value
 	 */
-	getButton(buttonName: string) {
+	getButton(buttonName: string): number {
 		let buttons = this.button(buttonName);
 		if (!Array.isArray(buttons)) {
 			buttons = [buttons];
 		}
 		//forced arrays
 		let value = false;
-		return buttons
-			.map(button => {
-				switch (button.type) {
-					case "gamepad":
-						if (this.getDevice() == "gamepad")
-							return this.getGamePadButton(button.button);
-						break;
-					case "keyboard":
-						if (this.getDevice() !== "gamepad")
-							return this.getKey(button.key);
-						break;
-					case "mouse":
-						if (this.getDevice() !== "gamepad")
-							return this.getMouseButton(button.button);
-						break;
-				}
-				return 0;
-			})
-			.reduce((a, b) => a + b);
+		let weights: Array<
+			number
+		> = buttons.map((button: ButtonType): number => {
+			switch (button.type) {
+				case "gamepad":
+					if (this.getDevice() == "gamepad")
+						return this.getGamePadButton(button.button);
+					break;
+				case "keyboard":
+					if (this.getDevice() !== "gamepad")
+						return this.getKey(button.key);
+					break;
+				case "mouse":
+					if (this.getDevice() !== "gamepad")
+						return this.getMouseButton(button.button);
+					break;
+			}
+			return 0;
+		});
+
+		return weights.reduce((a, b) => a + b);
 	}
 	/**
 	 * gets value of a gamepad button
@@ -158,28 +160,20 @@ export default class Input {
 		}
 		return 0;
 	}
-	/**
-	 * not implemented
-	 */
-	getButtonDown() {}
 
-	/**
-	 * not implemented
-	 */
-	getButtonUp() {}
 	/**
 	 * gets whether key is currently presseed
 	 * @param {string|number} keyCode 
-	 * @return {boolean} state
+	 * @return {number} state 1 for pressed 0 for not
 	 */
-	getKey(keyCode: string | number): boolean {
+	getKey(keyCode: string | number): number {
 		keyCode = this.mapKeyboard(keyCode);
 		// if (this.keyStatus.hasOwnProperty(keyCode))
 		// 	return this.keyStatus[keyCode];
 		if (this.keyboard.down.indexOf(keyCode) !== -1) {
-			return true;
+			return 1;
 		}
-		return false;
+		return 0;
 	}
 	/**
 	 * returns true only on the frame the key is pressed in
@@ -204,10 +198,10 @@ export default class Input {
 	/**
 	 * returns if mouse button is pressed
 	 * @param {string|number} button 
-	 * @return {boolean} state
+	 * @return {number} state
 	 */
-	getMouseButton(button: string | number): boolean {
-		return this.mouse.down[this.mapMouse(button)] || false;
+	getMouseButton(button: string | number): number {
+		return this.mouse.down[this.mapMouse(button)] || false ? 1 : 0;
 	}
 	/**
 	 * returns true only on the frame the mouse is pressed in
@@ -245,7 +239,7 @@ export default class Input {
 	 * alias of getLastActivityDevice
 	 * @return {boolean} state
 	 */
-	getDevice() {
+	getDevice(): "mouse" | "keyboard" | "gamepad" {
 		return this.getLastActivityDevice();
 	}
 }

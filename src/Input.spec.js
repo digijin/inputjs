@@ -75,26 +75,26 @@ describe("Input unit tests", () => {
 		describe("getButton", () => {
 			it("should return if raw", () => {
 				input.keyboard = { down: [2] };
-				expect(input.getButton("raw")).toBe(true);
+				expect(input.getButton("raw")).toBeTruthy();
 			});
 			it("should false if not raw", () => {
 				input.keyboard = { down: [] };
-				expect(input.getButton("raw")).toBe(false);
+				expect(input.getButton("raw")).toBeFalsy();
 			});
 		});
 		describe("getKey", () => {
 			it("general", () => {
 				input.keyboard = { down: [12] };
-				expect(input.getKey("test")).toBe(true);
-				expect(input.getKey("12")).toBe(true);
-				expect(input.getKey("test2")).toBe(false);
+				expect(input.getKey("test")).toBe(1);
+				expect(input.getKey("12")).toBe(1);
+				expect(input.getKey("test2")).toBe(0);
 				input.keyboard = { down: [34] };
-				expect(input.getKey("test")).toBe(false);
-				expect(input.getKey("test2")).toBe(true);
+				expect(input.getKey("test")).toBe(0);
+				expect(input.getKey("test2")).toBe(1);
 			});
 			it("maps to parsed ", () => {
 				input.keyboard = { down: [12] };
-				expect(input.getKey("12")).toBe(true);
+				expect(input.getKey("12")).toBeTruthy();
 			});
 		});
 
