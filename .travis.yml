@@ -10,6 +10,7 @@ script:
 - yarn build
 - yarn test
 - yarn karma
+- cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js
 - yarn build:flow
 - rm lib/*.spec.js
 - rm lib/main*

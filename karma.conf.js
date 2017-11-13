@@ -46,7 +46,7 @@ module.exports = function(config) {
 			showSpecTiming: true
 		},
 		coverageIstanbulReporter: {
-			reports: ["html", "text"],
+			reports: ["html", "text", "lcov"],
 			dir: path.join(__dirname, "coverage"),
 			// if using webpack and pre-loaders, work around webpack breaking the source path
 			fixWebpackSourcePaths: true,
