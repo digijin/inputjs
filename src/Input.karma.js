@@ -109,11 +109,11 @@ describe("Input integration tests", () => {
 	});
 	describe("getMouseButton", () => {
 		it("should detect clicks", () => {
-			expect(input.getMouseButton("left")).toBe(false);
+			expect(input.getMouseButton("left")).toBe(0);
 			mouseEvent("mousedown", { button: 0 });
-			expect(input.getMouseButton(0)).toBe(true);
+			expect(input.getMouseButton(0)).toBe(1);
 			mouseEvent("mouseup", { button: 0 });
-			expect(input.getMouseButton(0)).toBe(false);
+			expect(input.getMouseButton(0)).toBe(0);
 		});
 	});
 	describe("getAxis", () => {
@@ -123,13 +123,13 @@ describe("Input integration tests", () => {
 		it("should keyboard", () => {
 			window.onkeydown({ keyCode: 37 });
 			expect(input.getDevice()).toBe("keyboard");
-			expect(input.getKey("left")).toBe(true);
+			expect(input.getKey("left")).toBe(1);
 			expect(input.getAxis("horizontal")).toBe(-1);
 			window.onkeydown({ keyCode: 39 });
-			expect(input.getKey("right")).toBe(true);
+			expect(input.getKey("right")).toBe(1);
 			expect(input.getAxis("horizontal")).toBe(0);
 			window.onkeyup({ keyCode: 37 });
-			expect(input.getKey("left")).toBe(false);
+			expect(input.getKey("left")).toBe(0);
 			expect(input.getAxis("horizontal")).toBe(1);
 		});
 		it("should gamepad", () => {
