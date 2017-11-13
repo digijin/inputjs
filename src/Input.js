@@ -110,6 +110,9 @@ export default class Input {
 					let neg = this.getKey(axes[i].negative);
 					return (pos ? 1 : 0) + (neg ? -1 : 0);
 				}
+				if (axes[i].type == "mouse") {
+					return this.mouse.activity.wheelDelta.y;
+				}
 			}
 		}
 		return 0;

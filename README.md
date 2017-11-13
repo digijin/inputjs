@@ -7,6 +7,8 @@ This is intended to be used for gaming. If you're trying to use it for standard 
 
 Usage of the getKey and getButton functions can be used with no additional setup, but to use the activity functions like getButtonDown and getButtonUp one must invoke the endTick function at the end of each frame loop to flush the internal caches and begin taking in new events.
 
+mouse attaches itself to document, for testing make calls to document
+
 ## installation
 ```
 yarn add unityinput
@@ -28,6 +30,13 @@ let gameloop  = () => {
 
 setInterval(gameloop, 100);
 
+```
+
+## dev
+```
+yarn test
+yarn karma
+yarn dev
 ```
 
 

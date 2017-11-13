@@ -4,10 +4,14 @@ import Point from "Point";
 export default class Mouse {
 	position: Point;
 	down: Object;
-	activity: { down: Array<number>, up: Array<number> };
+	activity: {
+		down: Array<number>,
+		up: Array<number>,
+		wheelDelta: { x: number, y: number }
+	};
 	lastAction: number;
 	constructor() {
-		this.activity = { down: [], up: [] };
+		this.activity = { down: [], up: [], wheelDelta: { x: 0, y: 0 } };
 		this.down = {};
 		this.lastAction = 0;
 		this.position = new Point({ x: 0, y: 0 });
@@ -27,11 +31,15 @@ export default class Mouse {
 			this.activity.up.push(e.button);
 			this.action();
 		});
+		document.addEventListener("wheel", (e: MouseEvent): void => {
+			this.activity.wheelDelta.x += e.deltaX;
+			this.activity.wheelDelta.y += e.deltaY;
+		});
 	}
 	action() {
 		this.lastAction = new Date().getTime();
 	}
 	endTick() {
-		this.activity = { down: [], up: [] };
+		this.activity = { down: [], up: [], wheelDelta: { x: 0, y: 0 } };
 	}
 }
