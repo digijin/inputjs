@@ -13,6 +13,7 @@ import defaults from "./defaults";
  */
 export type ButtonType = { type: string, button: number, key: number };
 export default class Input {
+	target: Object;
 	mouse: Mouse;
 	keyboard: Keyboard;
 	gamepad: GamePad;
@@ -47,7 +48,7 @@ export default class Input {
 			config.mouseMapping
 		);
 		this.buttons = Object.assign({}, defaults.buttons, config.buttons);
-		this.mouse = new Mouse();
+		this.mouse = new Mouse(config.target);
 		this.keyboard = new Keyboard();
 		this.gamepad = new GamePad();
 	}

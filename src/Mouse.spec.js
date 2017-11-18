@@ -1,7 +1,6 @@
 import Mouse from "Mouse";
 
-let mouseEvent = function(eventName, params) {
-	const target = document;
+let mouseEvent = function(eventName, params, target = document) {
 	let event = document.createEvent("Event");
 	Object.assign(event, params);
 	event.initEvent(eventName, true, true);
@@ -32,6 +31,21 @@ describe("Mouse unit test", () => {
 		it("should update from mousemove", () => {
 			mouseEvent("mousemove", { clientX: 0, clientY: 0 });
 			expect(mouse.lastAction).toBeGreaterThan(0);
+		});
+	});
+	describe("target", () => {
+		let div;
+		beforeEach(() => {
+			div = document.createElement("DIV");
+			mouse = new Mouse(div);
+		});
+		it("should not fire when not clicking target", () => {
+			mouseEvent("mousedown", { button: 0 });
+			expect(mouse.down[0]).not.toBeDefined();
+		});
+		it("should fire when clicking target", () => {
+			mouseEvent("mousedown", { button: 0 }, div);
+			expect(mouse.down[0]).toBeTruthy();
 		});
 	});
 });

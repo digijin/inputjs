@@ -56,6 +56,11 @@ describe("Input unit tests", () => {
 			expect(input.mapMouse("middle")).toBe(1);
 			expect(input.mapMouse("right")).toBe(2);
 		});
+		it("should pass target", () => {
+			let div = document.createElement("DIV");
+			let input = new Input({ target: div });
+			expect(input.mouse.target).toBe(div);
+		});
 	});
 	describe("keyboard", () => {
 		let input;

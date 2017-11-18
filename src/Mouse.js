@@ -10,28 +10,30 @@ export default class Mouse {
 		wheelDelta: { x: number, y: number }
 	};
 	lastAction: number;
-	constructor() {
+	target: Object;
+	constructor(target: Object = document) {
+		this.target = target;
 		this.activity = { down: [], up: [], wheelDelta: { x: 0, y: 0 } };
 		this.down = {};
 		this.lastAction = 0;
 		this.position = new Point({ x: 0, y: 0 });
-		document.addEventListener("mousemove", (e: MouseEvent): void => {
+		target.addEventListener("mousemove", (e: MouseEvent): void => {
 			this.position = new Point({ x: e.clientX, y: e.clientY });
 			this.action();
 		});
-		document.addEventListener("mousedown", (e: MouseEvent): void => {
+		target.addEventListener("mousedown", (e: MouseEvent): void => {
 			this.down[e.button] = true;
 
 			this.activity.down.push(e.button);
 			this.action();
 		});
-		document.addEventListener("mouseup", (e: MouseEvent): void => {
+		target.addEventListener("mouseup", (e: MouseEvent): void => {
 			this.down[e.button] = false;
 
 			this.activity.up.push(e.button);
 			this.action();
 		});
-		document.addEventListener("wheel", (e: MouseEvent): void => {
+		target.addEventListener("wheel", (e: MouseEvent): void => {
 			this.activity.wheelDelta.x += e.deltaX;
 			this.activity.wheelDelta.y += e.deltaY;
 		});
