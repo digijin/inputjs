@@ -29,12 +29,24 @@ export default class Input {
 	 * @param {Object} config - mapping and button/axis configuration
 	 */
 	constructor(config: Object = {}) {
-		config = Object.assign({}, defaults, config);
-		this.axes = config.axes;
-		this.keyboardMapping = config.keyboardMapping;
-		this.gamepadMapping = config.gamepadMapping;
-		this.mouseMapping = config.mouseMapping;
-		this.buttons = config.buttons;
+		// config = Object.assign({}, defaults, config);
+		this.axes = Object.assign({}, defaults.axes, config.axes);
+		this.keyboardMapping = Object.assign(
+			{},
+			defaults.keyboardMapping,
+			config.keyboardMapping
+		);
+		this.gamepadMapping = Object.assign(
+			{},
+			defaults.gamepadMapping,
+			config.gamepadMapping
+		);
+		this.mouseMapping = Object.assign(
+			{},
+			defaults.mouseMapping,
+			config.mouseMapping
+		);
+		this.buttons = Object.assign({}, defaults.buttons, config.buttons);
 		this.mouse = new Mouse();
 		this.keyboard = new Keyboard();
 		this.gamepad = new GamePad();
