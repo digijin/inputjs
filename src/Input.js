@@ -53,7 +53,7 @@ export default class Input {
 		this.gamepad = new GamePad();
 	}
 	/**
-	 * To be called at the end of each game tick to clear activity 
+	 * To be called at the end of each game tick to clear activity
 	 */
 	endTick() {
 		this.mouse.endTick();
@@ -62,7 +62,7 @@ export default class Input {
 	}
 	/**
 	 * maps a string or number to a keycode
-	 * @param {string|number} key 
+	 * @param {string|number} key
 	 * @return {number} value
 	 */
 	mapKeyboard(key: string | number): number {
@@ -73,7 +73,7 @@ export default class Input {
 	}
 	/**
 	 * maps a string or number to a mouse button
-	 * @param {string|number} key 
+	 * @param {string|number} key
 	 * @return {number} value
 	 */
 	mapMouse(key: string | number): number {
@@ -84,7 +84,7 @@ export default class Input {
 	}
 	/**
 	 * MAps a string or number to a gamepad button
-	 * @param {string|number} key 
+	 * @param {string|number} key
 	 * @return {number} value
 	 */
 	mapGamepad(key: string | number): number {
@@ -96,7 +96,7 @@ export default class Input {
 	}
 	/**
 	 * returns button configuration for a key
-	 * @param {string|number} key 
+	 * @param {string|number} key
 	 * @return {Array} value
 	 */
 	button(key: string | number): Array<ButtonType> {
@@ -107,7 +107,7 @@ export default class Input {
 	}
 	/**
 	 * returns the value for the state of the current axis
-	 * @param {string} axis 
+	 * @param {string} axis
 	 * @return {number} value
 	 */
 	getAxis(axis: string): number {
@@ -132,7 +132,7 @@ export default class Input {
 	}
 	/**
 	 * gets value for button name dependent on active device
-	 * @param {string} buttonName 
+	 * @param {string} buttonName
 	 * @return {number} value
 	 */
 	getButton(buttonName: string): number {
@@ -142,31 +142,31 @@ export default class Input {
 		}
 		//forced arrays
 		let value = false;
-		let weights: Array<
-			number
-		> = buttons.map((button: ButtonType): number => {
-			switch (button.type) {
-				case "gamepad":
-					if (this.getDevice() == "gamepad")
-						return this.getGamePadButton(button.button);
-					break;
-				case "keyboard":
-					if (this.getDevice() !== "gamepad")
-						return this.getKey(button.key);
-					break;
-				case "mouse":
-					if (this.getDevice() !== "gamepad")
-						return this.getMouseButton(button.button);
-					break;
+		let weights: Array<number> = buttons.map(
+			(button: ButtonType): number => {
+				switch (button.type) {
+					case "gamepad":
+						if (this.getDevice() == "gamepad")
+							return this.getGamePadButton(button.button);
+						break;
+					case "keyboard":
+						if (this.getDevice() !== "gamepad")
+							return this.getKey(button.key);
+						break;
+					case "mouse":
+						if (this.getDevice() !== "gamepad")
+							return this.getMouseButton(button.button);
+						break;
+				}
+				return 0;
 			}
-			return 0;
-		});
+		);
 
 		return weights.reduce((a, b) => a + b);
 	}
 	/**
 	 * gets value of a gamepad button
-	 * @param {string|number} button 
+	 * @param {string|number} button
 	 * @return {number} value
 	 */
 	getGamePadButton(button: string | number): number {
@@ -179,7 +179,7 @@ export default class Input {
 
 	/**
 	 * gets whether key is currently presseed
-	 * @param {string|number} keyCode 
+	 * @param {string|number} keyCode
 	 * @return {number} state 1 for pressed 0 for not
 	 */
 	getKey(keyCode: string | number): number {
@@ -193,7 +193,7 @@ export default class Input {
 	}
 	/**
 	 * returns true only on the frame the key is pressed in
-	 * @param {string|number} keyCode 
+	 * @param {string|number} keyCode
 	 * @return {boolean} state
 	 */
 	getKeyDown(keyCode: string | number): boolean {
@@ -203,7 +203,7 @@ export default class Input {
 	}
 	/**
 	 * returns true only on the frame the key is released in
-	 * @param {string|number} keyCode 
+	 * @param {string|number} keyCode
 	 * @return {boolean} state
 	 */
 	getKeyUp(keyCode: string | number): boolean {
@@ -213,7 +213,7 @@ export default class Input {
 	}
 	/**
 	 * returns if mouse button is pressed
-	 * @param {string|number} button 
+	 * @param {string|number} button
 	 * @return {number} state
 	 */
 	getMouseButton(button: string | number): number {
@@ -221,7 +221,7 @@ export default class Input {
 	}
 	/**
 	 * returns true only on the frame the mouse is pressed in
-	 * @param {string|number} button 
+	 * @param {string|number} button
 	 * @return {boolean} state
 	 */
 	getMouseButtonDown(button: string | number): boolean {
@@ -229,7 +229,7 @@ export default class Input {
 	}
 	/**
 	 * returns true only on the frame the mouse is released in
-	 * @param {string|number} button 
+	 * @param {string|number} button
 	 * @return {boolean} state
 	 */
 	getMouseButtonUp(button: string | number): boolean {
