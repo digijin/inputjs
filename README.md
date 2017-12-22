@@ -12,6 +12,10 @@ Usage of the getKey and getButton functions can be used with no additional setup
 
 mouse attaches itself to document, for testing make calls to document
 
+for button configs that include both gamepad and keyboard/mouse, the package returns values relevant to the last device that registered an interaction. So if you define a button or axis to both keyboard/mouse and gamepad, if you use your gamepad the package will return the state of the gamepad and then when it detects input from keyboard or mouse it will swap to keyboard/mouse controls until it hears another event from the gamepad.
+
+This is so the end user can seamlessly swap between gamepad and keyboard/mouse. The user case of a player using a gamepad and keyboard/mouse simultaneously is not covered by this package.
+
 ## installation
 
 ```

@@ -77,6 +77,13 @@ describe("Input unit tests", () => {
 				}
 			});
 		});
+
+		describe("getButtonDown", () => {
+			it("should return true on the frame the button is pressed", () => {
+				input.keyboard.activity.down = [2];
+				expect(input.getButtonDown("raw")).toBeTruthy();
+			});
+		});
 		describe("getButton", () => {
 			it("should return if raw", () => {
 				input.keyboard = { down: [2] };

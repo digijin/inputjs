@@ -165,6 +165,41 @@ export default class Input {
 		return weights.reduce((a, b) => a + b);
 	}
 	/**
+	 * gets whether button was pressed in last interval
+	 * requires input.tick top have been called appropriately
+	 * @param {string} buttonName
+	 * @return {number} value
+	 */
+	getButtonDown(buttonName: string): number {
+		let buttons = this.button(buttonName);
+		if (!Array.isArray(buttons)) {
+			buttons = [buttons];
+		}
+		//forced arrays
+		let value = false;
+		let weights: Array<number> = buttons.map(
+			(button: ButtonType): number => {
+				switch (button.type) {
+					case "gamepad":
+						if (this.getDevice() == "gamepad")
+							return this.getGamePadButtonDown(button.button);
+						break;
+					case "keyboard":
+						if (this.getDevice() !== "gamepad")
+							return this.getKeyDown(button.key);
+						break;
+					case "mouse":
+						if (this.getDevice() !== "gamepad")
+							return this.getMouseButtonDown(button.button);
+						break;
+				}
+				return 0;
+			}
+		);
+
+		return weights.reduce((a, b) => a + b);
+	}
+	/**
 	 * gets value of a gamepad button
 	 * @param {string|number} button
 	 * @return {number} value
