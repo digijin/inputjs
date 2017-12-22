@@ -5,10 +5,6 @@ let mouseEvent = function(eventName, params) {
 	let event = document.createEvent("Event");
 	Object.assign(event, params);
 	event.initEvent(eventName, true, true);
-	if (!target) {
-		debugger;
-		throw new Error("no target");
-	}
 	target.dispatchEvent(event); //was document
 };
 
