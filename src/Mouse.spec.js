@@ -48,4 +48,16 @@ describe("Mouse unit test", () => {
 			expect(mouse.down[0]).toBeTruthy();
 		});
 	});
+	describe("mousewheel", () => {
+		let div;
+		beforeEach(() => {
+			div = document.createElement("DIV");
+			mouse = new Mouse(div);
+		});
+		it("should detect scroll", () => {
+			mouseEvent("wheel", { deltaX: 1, deltaY: 2 }, div);
+			expect(mouse.activity.wheelDelta.x).toBe(1);
+			expect(mouse.activity.wheelDelta.y).toBe(2);
+		});
+	});
 });
