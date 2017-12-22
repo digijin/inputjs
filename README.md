@@ -91,11 +91,29 @@ getButtonDown is not implemented yet. to get a purely cross input solution you n
 
 ## dev
 
+test frameworks are both jest and karma/jasmine/webpack
+
+### one-off tests
+
 ```
 yarn test
 yarn karma
+```
+
+### watchers
+
+```
+yarn test:watch
+yarn karma:watch
+```
+
+### webpack dev server
+
+```
 yarn dev
 ```
+
+and then hit up `http://localhost:8080/demo/` in your browser
 
 ## docs
 
