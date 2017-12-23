@@ -14,6 +14,29 @@ describe("Input unit tests", () => {
 			new Input();
 		}).not.toThrow();
 	});
+
+	describe("map resolution fallbacks", () => {
+		let input;
+		beforeEach(() => {
+			input = new Input();
+		});
+		it("mapMouse", () => {
+			expect(input.mapMouse("123")).toBe(123);
+		});
+		it("mapGamepad", () => {
+			expect(input.mapGamepad("123")).toBe(123);
+		});
+		it("button", () => {
+			expect(() => {
+				input.button("abc123");
+			}).toThrow();
+		});
+		it("getAxis", () => {
+			expect(() => {
+				input.getAxis("abc123");
+			}).toThrow(new Error("getAxis undefined axis: abc123"));
+		});
+	});
 	describe("gamepad", () => {
 		let input;
 		beforeEach(() => {
@@ -60,6 +83,9 @@ describe("Input unit tests", () => {
 			let div = document.createElement("DIV");
 			let input = new Input({ target: div });
 			expect(input.mouse.target).toBe(div);
+		});
+		it("mousewheel", () => {
+			let input = new Input();
 		});
 	});
 	describe("keyboard", () => {

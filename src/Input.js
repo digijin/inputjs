@@ -112,6 +112,7 @@ export default class Input {
 	 */
 	getAxis(axis: string): number {
 		let axes = this.axes[axis];
+		if (!axes) throw new Error("undefined axis: " + axis);
 		for (let i = 0; i < axes.length; i++) {
 			if (this.getDevice() == "gamepad") {
 				if (axes[i].type == "gamepad") {
