@@ -185,23 +185,32 @@ export default class Input {
 			(button: ButtonType): number => {
 				switch (button.type) {
 					case "gamepad":
-						if (this.getDevice() == "gamepad")
-							return this.getGamePadButtonDown(button.button);
-						break;
+						throw new Error(
+							"getButtonDown gamepad not implemented"
+						);
+					// if (this.getDevice() == "gamepad") {
+					// 	return this.getGamePadButtonDown(button.button);
+					// }
+					// break;
 					case "keyboard":
-						if (this.getDevice() !== "gamepad")
+						if (this.getDevice() !== "gamepad") {
 							return this.getKeyDown(button.key);
+						}
 						break;
 					case "mouse":
-						if (this.getDevice() !== "gamepad")
-							return this.getMouseButtonDown(button.button);
-						break;
+						throw new Error("getButtonDown mouse not implemented");
+					// if (this.getDevice() !== "gamepad") {
+					// 	return this.getMouseButtonDown(button.button);
+					// }
+					// break;
 				}
 				return 0;
 			}
 		);
 
-		return weights.reduce((a, b) => a + b);
+		return weights.reduce((a, b) => {
+			return a + b;
+		});
 	}
 	/**
 	 * gets value of a gamepad button

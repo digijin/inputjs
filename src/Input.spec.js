@@ -30,6 +30,53 @@ describe("Input unit tests", () => {
 			expect(input.getButton("test")).toBeFalsy();
 		});
 	});
+	describe("getButtonDown", () => {
+		it("should have array format optional", () => {
+			let input = new Input({
+				buttons: { test: { type: "keyboard", key: "space" } }
+			});
+			expect(input.getButtonDown("test")).toBeFalsy();
+		});
+		it("gamepad", () => {
+			let input = new Input({
+				buttons: { test: { type: "gamepad", key: "a" } }
+			});
+			spyOn(input, "getDevice").and.returnValue("gamepad");
+			// expect(input.getButtonDown("test")).toBeFalsy();
+			expect(() => {
+				input.getButtonDown("test");
+			}).toThrow();
+		});
+		it("mouse", () => {
+			let input = new Input({
+				buttons: { test: { type: "mouse", key: "left" } }
+			});
+			// spyOn(input, "getDevice").and.returnValue("gamepad");
+			// expect(input.getButtonDown("test")).toBeFalsy();
+			expect(() => {
+				input.getButtonDown("test");
+			}).toThrow();
+		});
+		it("keyboard ignored in game", () => {
+			let input = new Input({
+				buttons: { test: { type: "keyboard", key: "space" } }
+			});
+			spyOn(input, "getDevice").and.returnValue("gamepad");
+			expect(input.getButtonDown("test")).toBeFalsy();
+		});
+		it("multiple weights combined", () => {
+			let input = new Input({
+				buttons: {
+					test: [
+						{ type: "keyboard", key: "left" },
+						{ type: "keyboard", key: "space" },
+						{ type: "keyboard", key: "ctrl" }
+					]
+				}
+			});
+			expect(input.getButtonDown("test")).toBe(0);
+		});
+	});
 
 	describe("map resolution fallbacks", () => {
 		let input;
@@ -54,6 +101,10 @@ describe("Input unit tests", () => {
 			expect(() => {
 				input.getAxis("abc123");
 			}).toThrow(new Error("getAxis undefined axis: abc123"));
+		});
+		it("getAxis with bad type", () => {
+			input = new Input({ axes: { test: [{ type: "whatever" }] } });
+			expect(input.getAxis("test")).toBe(0);
 		});
 		it("getGamePadButton", () => {
 			expect(() => {
