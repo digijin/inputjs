@@ -15,6 +15,22 @@ describe("Input unit tests", () => {
 		}).not.toThrow();
 	});
 
+	describe("getButton", () => {
+		it("should have array format optional", () => {
+			let input = new Input({
+				buttons: { test: { type: "keyboard", key: "space" } }
+			});
+			expect(input.getButton("test")).toBeFalsy();
+		});
+		it("return mouse", () => {
+			let input = new Input({
+				buttons: { test: { type: "mouse", key: "left" } }
+			});
+
+			expect(input.getButton("test")).toBeFalsy();
+		});
+	});
+
 	describe("map resolution fallbacks", () => {
 		let input;
 		beforeEach(() => {
@@ -61,11 +77,17 @@ describe("Input unit tests", () => {
 				},
 				buttons: {
 					mapped: [{ type: "gamepad", button: "a" }],
-					raw: [{ type: "gamepad", key: 1 }]
+					raw: [{ type: "gamepad", key: 1 }],
+					mousey: { type: "mouse", key: "left" }
 				}
 			});
 
 			spyOn(input, "getDevice").and.returnValue("gamepad");
+		});
+		it("should ignore mouse in gamepad mode", () => {
+			spyOn(input, "getMouseButton");
+			input.getButton("mousey");
+			expect(input.getMouseButton).not.toHaveBeenCalled();
 		});
 		describe("mapGamepad", () => {
 			it("sohuld return number", () => {

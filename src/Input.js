@@ -147,16 +147,19 @@ export default class Input {
 			(button: ButtonType): number => {
 				switch (button.type) {
 					case "gamepad":
-						if (this.getDevice() == "gamepad")
+						if (this.getDevice() == "gamepad") {
 							return this.getGamePadButton(button.button);
+						}
 						break;
 					case "keyboard":
-						if (this.getDevice() !== "gamepad")
+						if (this.getDevice() !== "gamepad") {
 							return this.getKey(button.key);
+						}
 						break;
 					case "mouse":
-						if (this.getDevice() !== "gamepad")
+						if (this.getDevice() !== "gamepad") {
 							return this.getMouseButton(button.button);
+						}
 						break;
 				}
 				return 0;
