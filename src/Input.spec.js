@@ -31,10 +31,24 @@ describe("Input unit tests", () => {
 				input.button("abc123");
 			}).toThrow();
 		});
+		it("button", () => {
+			expect(Array.isArray(input.button(1))).toBe(true);
+		});
 		it("getAxis", () => {
 			expect(() => {
 				input.getAxis("abc123");
 			}).toThrow(new Error("getAxis undefined axis: abc123"));
+		});
+		it("getGamePadButton", () => {
+			expect(() => {
+				input.getGamePadButton("nobutt");
+			}).toThrow();
+		});
+	});
+	describe("general", () => {
+		it("getAxis empty", () => {
+			let input = new Input({ axes: { empty: [] } });
+			expect(input.getAxis("empty")).toBe(0);
 		});
 	});
 	describe("gamepad", () => {
@@ -85,7 +99,9 @@ describe("Input unit tests", () => {
 			expect(input.mouse.target).toBe(div);
 		});
 		it("mousewheel", () => {
-			let input = new Input();
+			let input = new Input({ axes: { mousey: [{ type: "mouse" }] } });
+			input.mouse.activity.wheelDelta.y = 123;
+			expect(input.getAxis("mousey")).toBe(123);
 		});
 	});
 	describe("keyboard", () => {

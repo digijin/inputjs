@@ -210,7 +210,8 @@ export default class Input {
 		if (gp) {
 			return gp.buttons[this.mapGamepad(button)].value;
 		}
-		return 0;
+		// return 0;
+		throw new Error("getGamePadButton cant find " + button);
 	}
 
 	/**
