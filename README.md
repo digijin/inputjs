@@ -1,6 +1,6 @@
 # UnityInput
 
-[![npm version](https://badge.fury.io/js/unityinput.svg)](http://badge.fury.io/js/unityinput) [![Build Status](https://travis-ci.org/digijin/inputjs.svg?branch=master)](https://travis-ci.org/digijin/inputjs) [![Coverage Status](https://coveralls.io/repos/github/digijin/inputjs/badge.svg?branch=master)](https://coveralls.io/github/digijin/inputjs?branch=master)
+[![npm version](https://badge.fury.io/js/unityinput.svg)](http://badge.fury.io/js/unityinput) [![Build Status](https://travis-ci.org/digijin/inputjs.svg?branch=master)](https://travis-ci.org/digijin/inputjs) [![Coverage Status](https://coveralls.io/repos/github/digijin/inputjs/badge.svg?branch=master)](https://coveralls.io/github/digijin/inputjs?branch=master) [![Code Climate](https://codeclimate.com/github/digijin/inputjs.svg)](https://codeclimate.com/github/digijin/inputjs)
 
 ## Intro
 
