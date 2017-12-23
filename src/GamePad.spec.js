@@ -17,6 +17,14 @@ describe("GamePad unit tests", () => {
 		expect(navigator.getGamepads).toBeDefined();
 	});
 
+	it("updateGamepads with stale gamepad", () => {
+		spyOn(gamepad, "getGamePad").and.returnValue({ timestamp: 123 });
+		gamepad.updateGamepads();
+		gamepad.lastAction = 123;
+		gamepad.updateGamepads();
+		expect(gamepad.lastAction).toBe(123);
+	});
+
 	describe("getGamePad", () => {
 		it("should return any non null object in gamepads", () => {
 			let gp = { name: "gamepad" };
