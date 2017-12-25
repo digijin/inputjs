@@ -2,3 +2,11 @@ node_modules
 dist/demo.js
 .vscode
 src
+coverage
+demo
+__mocks__
+.travis.yml
+docker-compose.yml
+Dockerfile
+setupTest.js
+webpack.config.js
