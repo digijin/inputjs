@@ -66,10 +66,7 @@ export default class Input {
 	 * @return {number} value
 	 */
 	mapKeyboard(key: string | number): number {
-		if (typeof key === "number") return key;
-		if (this.keyboardMapping.hasOwnProperty(key))
-			return this.keyboardMapping[key];
-		return parseInt(key);
+		return this.map(key, this.keyboardMapping);
 	}
 	/**
 	 * maps a string or number to a mouse button
@@ -77,11 +74,15 @@ export default class Input {
 	 * @return {number} value
 	 */
 	mapMouse(key: string | number): number {
+		return this.map(key, this.mouseMapping);
+	}
+
+	map(key: string | number, mapping: Object): number {
 		if (typeof key === "number") return key;
-		if (this.mouseMapping.hasOwnProperty(key))
-			return this.mouseMapping[key];
+		if (mapping.hasOwnProperty(key)) return mapping[key];
 		return parseInt(key);
 	}
+
 	/**
 	 * MAps a string or number to a gamepad button
 	 * @param {string|number} key
