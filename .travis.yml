@@ -1,9 +1,14 @@
 language: node_js
 node_js:
-- '7.6'
-sudo: required
-services:
-- docker
+- 'lts/*'
+- 'node'
+- '8'
+- '7'
+- '6'
+cache:
+  yarn: true
+  directories:
+    - "node_modules"
 addons:
   chrome: stable
 script:
@@ -14,7 +19,6 @@ script:
 - yarn build:flow
 - rm lib/*.spec.js
 - rm lib/main*
-before_deploy: "ls -la"
 deploy:
   skip_cleanup: true
   provider: npm
