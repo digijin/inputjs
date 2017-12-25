@@ -21,18 +21,16 @@ export default class Mouse {
 			this.position = new Point({ x: e.clientX, y: e.clientY });
 			this.action();
 		});
-		target.addEventListener("mousedown", (e: MouseEvent): void => {
-			this.down[e.button] = true;
 
-			this.activity.down.push(e.button);
-			this.action();
-		});
-		target.addEventListener("mouseup", (e: MouseEvent): void => {
-			this.down[e.button] = false;
+		["up", "down"].forEach(dir => {
+			target.addEventListener("mouse" + dir, (e: MouseEvent): void => {
+				this.down[e.button] = dir == "down";
 
-			this.activity.up.push(e.button);
-			this.action();
+				this.activity[dir].push(e.button);
+				this.action();
+			});
 		});
+
 		target.addEventListener("wheel", (e: MouseEvent): void => {
 			this.activity.wheelDelta.x += e.deltaX;
 			this.activity.wheelDelta.y += e.deltaY;
