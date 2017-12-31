@@ -181,14 +181,13 @@ export default class Input {
 			buttons = [buttons];
 		}
 		//forced arrays
-		let value = false;
 		let weights: Array<number> = buttons.map(
 			(button: ButtonType): number => {
 				switch (button.type) {
 					case "gamepad":
-						throw new Error(
-							"getButtonDown gamepad not implemented"
-						);
+					// throw new Error(
+					// 	"getButtonDown gamepad not implemented"
+					// );
 					// if (this.getDevice() == "gamepad") {
 					// 	return this.getGamePadButtonDown(button.button);
 					// }
@@ -199,11 +198,54 @@ export default class Input {
 						}
 						break;
 					case "mouse":
-						throw new Error("getButtonDown mouse not implemented");
-					// if (this.getDevice() !== "gamepad") {
-					// 	return this.getMouseButtonDown(button.button);
+						// throw new Error("getButtonDown mouse not implemented");
+						if (this.getDevice() !== "gamepad") {
+							return this.getMouseButtonDown(button.button);
+						}
+						break;
+				}
+				return 0;
+			}
+		);
+
+		return weights.reduce((a, b) => {
+			return a + b;
+		});
+	}
+	/**
+	 * gets whether button was released in last interval
+	 * requires input.tick top have been called appropriately
+	 * @param {string} buttonName
+	 * @return {number} value
+	 */
+	getButtonUp(buttonName: string): number {
+		let buttons = this.button(buttonName);
+		if (!Array.isArray(buttons)) {
+			buttons = [buttons];
+		}
+		//forced arrays
+		let weights: Array<number> = buttons.map(
+			(button: ButtonType): number => {
+				switch (button.type) {
+					case "gamepad":
+					// throw new Error(
+					// 	"getButtonDown gamepad not implemented"
+					// );
+					// if (this.getDevice() == "gamepad") {
+					// 	return this.getGamePadButtonDown(button.button);
 					// }
 					// break;
+					case "keyboard":
+						if (this.getDevice() !== "gamepad") {
+							return this.getKeyUp(button.key);
+						}
+						break;
+					case "mouse":
+						// throw new Error("getButtonDown mouse not implemented");
+						if (this.getDevice() !== "gamepad") {
+							return this.getMouseButtonUp(button.button);
+						}
+						break;
 				}
 				return 0;
 			}

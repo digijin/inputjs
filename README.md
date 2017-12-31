@@ -95,7 +95,7 @@ let gameloop = () => {
 
 ## Notes
 
-getButtonDown is currently only supporting keyboard.
+getButtonDown is currently not supporting gamepad.
 
 ## Dev
 

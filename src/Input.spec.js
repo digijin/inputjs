@@ -45,7 +45,7 @@ describe("Input unit tests", () => {
 			// expect(input.getButtonDown("test")).toBeFalsy();
 			expect(() => {
 				input.getButtonDown("test");
-			}).toThrow();
+			}).not.toThrow();
 		});
 		it("mouse", () => {
 			let input = new Input({
@@ -55,7 +55,7 @@ describe("Input unit tests", () => {
 			// expect(input.getButtonDown("test")).toBeFalsy();
 			expect(() => {
 				input.getButtonDown("test");
-			}).toThrow();
+			}).not.toThrow();
 		});
 		it("keyboard ignored in game", () => {
 			let input = new Input({
